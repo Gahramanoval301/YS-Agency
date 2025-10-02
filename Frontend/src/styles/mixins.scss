@@ -1,0 +1,202 @@
+@use "sass:meta";
+
+@use "./typography.scss" as *;
+@use "./colors.scss" as *;
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-col($gap: 0px, $justify: flex-start) {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+  justify-content: $justify;
+}
+
+// example usage:
+// @include flex(1rem, space-between);
+@mixin flex($gap: 0px, $justify: flex-start, $align: center, $dir: row) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+  gap: $gap;
+  flex-direction: $dir;
+}
+
+@mixin grid($gap, $cols: 1) {
+  display: grid;
+  grid-template-columns: repeat($cols, 1fr);
+  gap: $gap;
+}
+
+@mixin image-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+@mixin button($w, $h, $bg, $color, $border-color) {
+  width: $w;
+  height: $h;
+  background-color: $bg;
+  color: $color;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  @include flex-center;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+@mixin display-text($level) {
+  font-family: $font-baloo;
+  font-weight: $semi-bold;
+  line-height: 100%;
+  letter-spacing: 0;
+
+  @if $level == 0 {
+    font-size: 310px;
+  } @else if $level == 1 {
+    font-size: 180px;
+  } @else if $level == 2 {
+    font-size: 150px;
+  } @else if $level == 3 {
+    font-size: 120px;
+  } @else if $level == 4 {
+    font-size: 98px;
+  } @else if $level == 5 {
+    font-size: 72px;
+  } @else if $level == 6 {
+    font-size: 60px;
+  } @else if $level == 7 {
+    font-size: 48px;
+  } @else {
+    font-size: 36px;
+  }
+}
+
+@mixin heading-text($level, $weight: $semi-bold) {
+  font-family: $font-inter;
+  font-weight: $weight;
+  letter-spacing: 0;
+
+  @if $level == "A" {
+    font-size: 120px;
+    line-height: 120%;
+  } @else if $level == 0 {
+    font-size: 80px;
+    line-height: 140%;
+  } @else if $level == 1 {
+    font-size: 36px;
+    line-height: 120%;
+  } @else if $level == 2 {
+    font-size: 30px;
+    line-height: 120%;
+  } @else if $level == 3 {
+    font-size: 24px;
+    line-height: 130%;
+  } @else if $level == 4 {
+    font-size: 20px;
+    line-height: 130%;
+  } @else if $level == 5 {
+    font-size: 18px;
+    line-height: 140%;
+  } @else if $level == 6 {
+    font-size: 16px;
+    line-height: 140%;
+  } @else if $level == 7 {
+    font-size: 14px;
+    line-height: 140%;
+  } @else if $level == 8 {
+    font-size: 12px;
+    line-height: 140%;
+  }
+}
+
+@mixin body-text(
+  $level: default,
+  $align: left,
+  $leading: normal,
+  $weight: $regular
+) {
+  font-family: $font-noto-sans;
+  font-weight: $weight;
+  letter-spacing: 0;
+  text-align: $align;
+  line-height: $leading;
+
+  @if $level == "large" {
+    font-size: 18px;
+  } @else if $level == "medium" {
+    font-size: 16px;
+  } @else if $level == "default" {
+    font-size: 14px;
+  } @else if $level == "small" {
+    font-size: 12px;
+  }
+}
+
+// how to use it:
+// @include border(1px, solid, $black, top) or
+// @include border(1px, solid, $black, $positions: top bottom)
+
+@mixin border(
+  $width: 1px,
+  $style: solid,
+  $color: $neutral-10,
+  $positions: all
+) {
+  @if $positions == all {
+    border: $width $style $color;
+  } @else if meta.type-of($positions) == list {
+    @each $position in $positions {
+      border-#{$position}: $width $style $color;
+    }
+  } @else {
+    border-#{$positions}: $width $style $color;
+  }
+}
+
+@mixin transition(
+  $properties: all,
+  $duration: 150ms,
+  $timing: ease-in-out,
+  $delay: 0ms
+) {
+  transition-property: $properties;
+  transition-duration: $duration;
+  transition-timing-function: $timing;
+  transition-delay: $delay;
+}
+
+@mixin size($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin line-clamp($number) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $number;
+}
+
+@mixin animate(
+  $name,
+  $duration: 150ms,
+  $timing: linear,
+  $delay: 0ms,
+  $iteration: 1,
+  $fill: forwards
+) {
+  animation: $name $duration $timing $delay $iteration $fill;
+}

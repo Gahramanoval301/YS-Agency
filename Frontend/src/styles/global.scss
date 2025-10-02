@@ -1,0 +1,200 @@
+@use "./reset.scss";
+@use "./colors.scss" as *;
+@use "./mixins.scss" as *;
+@use "./typography.scss" as *;
+@use "./keyframes";
+
+* {
+  font-family: $font-noto-sans;
+}
+
+body {
+  background-color: $dashboard;
+  color: $black;
+}
+
+input,
+textarea {
+  @include body-text(default);
+  font-weight: $medium;
+  outline: none;
+
+  &::placeholder {
+    color: $neutral-50;
+  }
+}
+
+h1 {
+  @include heading-text(2);
+  font-size: 2rem;
+  font-weight: $medium;
+}
+
+h2 {
+  @include heading-text(6);
+}
+
+button {
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+// utilities
+.scrollbar-hidden {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// tiptap reset
+.tiptap {
+  @include size(100%);
+
+  ul,
+  ol {
+    margin-left: 1rem;
+  }
+
+  ul {
+    list-style-type: disc;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  li {
+    color: inherit;
+    display: list-item !important;
+  }
+
+  &.ProseMirror {
+    p.is-empty::before {
+      color: $neutral-30;
+      content: attr(data-placeholder);
+      float: left;
+      font-weight: $medium;
+      height: 0;
+      pointer-events: none;
+      @include body-text(small);
+    }
+
+    &.ProseMirror-focused,
+    .tiptap.ProseMirror:focus-visible {
+      outline: none;
+    }
+  }
+}
+
+// mui custom
+.MuiInput-root {
+  font-family: $font-noto-sans !important;
+}
+
+.MuiSelect-select {
+  align-items: center;
+  display: flex !important;
+  font-size: 14px !important;
+  gap: 8px;
+}
+
+.MuiSelect-icon {
+  color: inherit !important;
+  top: 50% !important;
+  translate: 0 -50%;
+  @include size(20px);
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.MuiMenu-paper {
+  border-radius: 0.5rem;
+  box-shadow: 0 7px 12px 0 rgba(0, 0, 0, 0.08);
+  margin-top: 10px;
+
+  @include border($color: $neutral-05);
+
+  & > ul {
+    padding: 0;
+
+    & > li {
+      @include body-text(small);
+      padding: 0.5rem 12px;
+
+      &.Mui-selected {
+        background-color: transparent;
+      }
+
+      &.MuiMenuItem-root {
+        background-color: transparent;
+      }
+    }
+  }
+}
+
+// picker custom
+.MuiPickersTextField-root {
+  .MuiPickersOutlinedInput-root {
+    border-radius: 0.5rem;
+
+    .MuiPickersSectionList-root {
+      order: 2;
+      padding: 0;
+      width: auto;
+    }
+
+    .MuiInputAdornment-root {
+      margin-left: 0;
+      order: 1;
+    }
+  }
+}
+
+// recharts custom
+.recharts-wrapper {
+  & .recharts-surface {
+    & .recharts-curve.recharts-tooltip-cursor {
+      stroke: $neutral-20;
+    }
+
+    & .recharts-cartesian-grid {
+      &[class^="recharts-cartesian-grid"] line {
+        stroke: $neutral-10;
+      }
+    }
+
+    & .recharts-cartesian-axis {
+      & .recharts-cartesian-axis-tick-value {
+        fill: $neutral-60;
+        font-weight: 500 !important;
+
+        @include heading-text(6);
+      }
+    }
+  }
+
+  & .recharts-tooltip-wrapper {
+    background-color: $white;
+    border: none !important;
+    border-radius: 0.5rem;
+    box-shadow: 2px 4px 6px 3px rgba(0, 0, 0, 0.08);
+    padding: 0.75rem 1rem;
+
+    ul {
+      @include flex(0.5rem, $dir: column, $align: stretch);
+
+      li {
+        color: $neutral-100;
+        font-weight: $semi-bold !important;
+
+        @include body-text(default, $leading: 140%);
+        @include flex(0.5rem);
+
+        & .recharts-tooltip-payload-dot {
+          border-radius: 100%;
+          display: inline-block;
+          @include size(0.5rem);
+        }
+      }
+    }
+  }
+}

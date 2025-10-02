@@ -1,0 +1,101 @@
+// ! don't use variables with the prefix of '$theme-'
+// ! use variables below :root configuration such as '$white'
+
+// default theme
+:root,
+[data-theme="light"]:root {
+  // Primary colors
+  --theme-beige-100: #f2e9da;
+  --theme-beige-20: #f2e9da33;
+  --theme-beige-40: #f2e9da66;
+  --theme-beige-60: #f2e9da99;
+  --theme-black: #2e2e2e;
+  --theme-dashboard: #f4f4f4;
+  --theme-error: #ff3b30;
+  --theme-gray-50: #667085;
+  --theme-green-05: #4caf500d;
+  --theme-green-100: #4caf50;
+
+  // Secondary colors
+  --theme-green-40: #4caf5066;
+  --theme-green-60: #4caf5099;
+  --theme-mint-05: #a8d5ba0d;
+  --theme-mint-100: #a8d5ba;
+  --theme-mint-40: #a8d5ba66;
+  --theme-mint-60: #a8d5ba99;
+  --theme-neutral-05: #2121210d;
+  --theme-neutral-10: #2121211a;
+  --theme-neutral-100: #212121;
+  --theme-neutral-20: #21212133;
+  --theme-neutral-30: #2121214d;
+  --theme-neutral-50: #21212180;
+
+  // Neutral colors
+  --theme-neutral-60: #21212199;
+  --theme-neutral-70: #212121b2;
+  --theme-neutral-80: #212121cc;
+  --theme-primary-black: #383838;
+  --theme-white: #ffffff;
+  --theme-wool-100: #f8f8f5;
+  --theme-wool-20: #f8f8f533;
+  --theme-wool-40: #f8f8f566;
+
+  --theme-wool-60: #f8f8f599;
+
+  --theme-yellow-100: #ffcc4d;
+
+  --theme-yellow-20: #ffcc4d33;
+  --theme-yellow-40: #ffcc4d66;
+
+  --theme-yellow-60: #ffcc4d99;
+}
+
+[data-theme="dark"]:root {
+  // dark theme colors go here
+  // example:
+  // $theme-green-100: [dark-theme-code];
+}
+
+// Primary colors
+$green-100: var(--theme-green-100);
+$green-60: var(--theme-green-60);
+$green-40: var(--theme-green-40);
+$green-05: var(--theme-green-05);
+$mint-100: var(--theme-mint-100);
+$mint-60: var(--theme-mint-60);
+$mint-40: var(--theme-mint-40);
+$mint-05: var(--theme-mint-05);
+$black: var(--theme-black);
+$white: var(--theme-white);
+$dashboard: var(--theme-dashboard);
+
+// Secondary colors
+$beige-100: var(--theme-beige-100);
+$beige-60: var(--theme-beige-60);
+$beige-40: var(--theme-beige-40);
+$beige-20: var(--theme-beige-20);
+$wool-100: var(--theme-wool-100);
+$wool-60: var(--theme-wool-60);
+$wool-40: var(--theme-wool-40);
+$wool-20: var(--theme-wool-20);
+
+// Neutral colors
+$neutral-100: var(--theme-neutral-100);
+$neutral-80: var(--theme-neutral-80);
+$neutral-70: var(--theme-neutral-70);
+$neutral-60: var(--theme-neutral-60);
+$neutral-50: var(--theme-neutral-50);
+$neutral-30: var(--theme-neutral-30);
+$neutral-20: var(--theme-neutral-20);
+$neutral-10: var(--theme-neutral-10);
+$neutral-05: var(--theme-neutral-05);
+
+$gray-50: var(--theme-gray-50);
+$primary-black: var(--theme-primary-black);
+
+$yellow-100: var(--theme-yellow-100);
+$yellow-60: var(--theme-yellow-60);
+$yellow-40: var(--theme-yellow-40);
+$yellow-20: var(--theme-yellow-20);
+
+$error: var(--theme-error);
