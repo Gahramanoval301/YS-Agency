@@ -1,0 +1,93 @@
+.pillNavContainer {
+  position: absolute;
+  z-index: 99;
+  background-color: rgba(255, 255, 255, 0.182);
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 200px;
+
+  .logoBox {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+  }
+
+  .menuItem {
+    border: 1px solid rgba(255, 255, 255, 0.252);
+    padding: 12px 16px;
+    border-radius: 34px;
+    color: rgba(255, 255, 255, 0.745);
+    cursor: pointer;
+
+    transition: all 0.4s ease; // smooth hover
+
+  }
+
+
+  .menuItem:hover {
+    position: relative;
+    color: white;
+    font-weight: 600;
+    border-radius: 34px;
+    padding: 12px 16px;
+    background: linear-gradient(45deg, #ffffff33, #ffffff00); // your subtle bg
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 2px; // this = border width
+      background: linear-gradient(45deg, #ffffffee, #ffffff00, #ffffff93);
+
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+
+      z-index: -1;
+    }
+  }
+
+  .activeMenuItem {
+    position: relative;
+    color: white;
+    font-weight: 600;
+    border-radius: 34px;
+    padding: 12px 16px;
+    background: linear-gradient(45deg, #ffffff33, #ffffff00); // your subtle bg
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 2px; // this = border width
+      background: linear-gradient(45deg, #ffffffee, #ffffff00, #ffffff93);
+
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+
+      z-index: -1;
+    }
+  }
+
+
+}
+
+@media screen and (max-width: 1024px) {
+  .pillNavContainer {
+
+    display: none;
+  }
+}

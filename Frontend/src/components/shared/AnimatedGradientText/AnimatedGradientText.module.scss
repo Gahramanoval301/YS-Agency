@@ -1,0 +1,12 @@
+.customGradientText1{
+  font-size: 20px;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+@media screen and (max-width:768px) {
+  
+  .customGradientText1{
+    font-size: 17px;
+    letter-spacing: 0.5px;
+  }
+}
