@@ -64,9 +64,7 @@ const SECOND_HALF_MENU_ITEMS = [
 const Footer = () => {
     return (
         <div className={styles.footerContainer}>
-            <div className={styles.footerTopDesign}>
-
-            </div>
+            <div className={styles.footerTopDesign}> </div>
             <div className={styles.footerWrapper}>
                 <div className={styles.footerContentWrapper}>
                     {/* First column */}

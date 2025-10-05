@@ -1,0 +1,175 @@
+.heroIndexBanner {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    background-color: #000; // solid black for better contrast
+
+    .effectWrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 85vh;
+            z-index: 10; // above everything
+            pointer-events: none;
+
+
+    }
+
+    .customRays {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1; // above background
+        opacity: 1; // make sure rays are visible
+    }
+
+    .particlesCanvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        opacity: 0.5; // optional, particles lighter
+    }
+
+    .bodyContent {
+        position: relative;
+        z-index: 3;
+        color: #fff;
+
+        .mainSection {
+            min-height: 100vh;
+            width: 80%;
+            margin-inline: auto;
+            display: flex;
+            flex-direction: column;
+
+            .customDivider {
+                width: 80%;
+                height: 1px;
+                border: none;
+                border-radius: 2px;
+                background: linear-gradient(90deg, #fff 5%, #FF50FC 95%);
+                margin-left: auto;
+                transform: translateY(-100px);
+
+            }
+
+
+            .titleContainer {
+                margin-block: 150px;
+                position: relative;
+                width: fit-content;
+                z-index: 1;
+
+                .titleWrapper {
+                    display: inline-block;
+                    background-color: #190720;
+                    padding: 10px;
+                    border-radius: 64px;
+
+                    h1 {
+                        display: inline-block;
+                        font-size: 110px;
+                        background: linear-gradient(90deg, #fff 60%, #FF50FC 90%, #fff);
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        background-clip: text;
+                        /* For Firefox */
+                        font-weight: bold;
+                    }
+                }
+
+                .circularTextWrapper {
+                    display: inline-block;
+                    position: absolute;
+                    right: -20px;
+                    top: -20px;
+                    z-index: -1;
+                }
+
+            }
+        }
+    }
+}
+
+@media screen and (max-width:1024px) {
+    .heroIndexBanner {
+        .bodyContent {
+            .mainSection {
+                width: 97%;
+
+                .titleContainer {
+                    .titleWrapper {
+                        h1 {
+                            font-size: 100px;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+@media screen and (max-width:768px) {
+    .heroIndexBanner {
+        .bodyContent {
+            .mainSection {
+                .titleContainer {
+                    .titleWrapper {
+                        h1 {
+                            font-size: 80px;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+@media screen and (max-width:576px) {
+    .heroIndexBanner {
+        .bodyContent {
+            .mainSection {
+                .titleContainer {
+                    .titleWrapper {
+                        h1 {
+                            font-size: 64px;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+@media screen and (max-width:450px) {
+    .heroIndexBanner {
+        .bodyContent {
+            .mainSection {
+                .customDivider {
+                    width: 70%;
+                    transform: translateY(-80px);
+
+                }
+
+                .titleContainer {
+                    margin-block: 100px;
+
+                    .titleWrapper {
+                        h1 {
+                            font-size: 40px;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}

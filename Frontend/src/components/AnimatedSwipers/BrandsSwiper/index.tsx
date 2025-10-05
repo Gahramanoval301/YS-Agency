@@ -56,7 +56,7 @@ export default function BrandsSwiper() {
     const nextRef = useRef<HTMLButtonElement>(null);
 
     return (
-        <>
+        <div className={styles.brandsSwiperWrapper}>
             <div className={styles.btnContainer}>
                 <button ref={prevRef} className={styles.prevButton}>LEFT</button>
                 <button ref={nextRef} className={styles.nextButton} style={{
@@ -113,7 +113,7 @@ export default function BrandsSwiper() {
                     </SwiperSlide>
                 ))}
             </Swiper>
-        </>
+        </div>
     );
 
 }

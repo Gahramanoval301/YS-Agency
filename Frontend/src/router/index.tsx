@@ -2,6 +2,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { lazy, Suspense, type JSX } from "react";
 import Home from "../pages/Home";
+import About from "../pages/About";
 
 // Lazy load Home (good habit for future when more pages come in)
 // const Home = lazy(() => import("../pages/Home"));
@@ -14,6 +15,10 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: withSuspense(<Home />),
+  },
+  {
+    path: "/about",
+    element: withSuspense(<About />),
   },
   {
     path: "*",

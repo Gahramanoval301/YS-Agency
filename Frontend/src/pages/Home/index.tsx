@@ -32,14 +32,6 @@ const Home: FC = () => {
                 <div className={styles.particlesBackground}>
                     <Particles
                         particleColors={["#ffffff", "#ffffff"]}
-                        particleCount={200}
-
-                        particleSpread={10}
-                        speed={0.1}
-                        particleBaseSize={100}
-                        moveParticlesOnHover={true}
-                        alphaParticles={false}
-                        disableRotation={false}
                     />
                 </div>
 
@@ -102,7 +94,7 @@ const Home: FC = () => {
                 <div style={{
                     height: "360px",
                     position: "relative",
-                    marginBlock:"2rem"
+                    marginBlock: "2rem"
                 }}>
                     <BrandsSwiper />
                 </div>

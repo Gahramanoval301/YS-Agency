@@ -11,7 +11,7 @@
 }
 
 .glare-hover::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(
@@ -22,13 +22,9 @@
     hsla(0, 0%, 0%, 0) 100%
   );
   transition: var(--gh-duration) ease;
-  background-size:
-    var(--gh-size) var(--gh-size),
-    100% 100%;
+  background-size: var(--gh-size) var(--gh-size), 100% 100%;
   background-repeat: no-repeat;
-  background-position:
-    -100% -100%,
-    0 0;
+  background-position: -100% -100%, 0 0;
 }
 
 .glare-hover:hover {
@@ -36,9 +32,7 @@
 }
 
 .glare-hover:hover::before {
-  background-position:
-    100% 100%,
-    0 0;
+  background-position: 100% 100%, 0 0;
 }
 
 .glare-hover--play-once::before {
@@ -47,24 +41,60 @@
 
 .glare-hover--play-once:hover::before {
   transition: var(--gh-duration) ease;
-  background-position:
-    100% 100%,
-    0 0;
+  background-position: 100% 100%, 0 0;
 }
 
-.seeAll{
+.seeAll {
   border: 2px solid white;
   color: white;
   width: 190px;
   padding: 12px 20px;
   border-radius: 42px;
   font-size: 22px;
-  font-weight: 600; 
+  font-weight: 600;
   background: linear-gradient(45deg, #ffffff9d, #ffffff16, #ffffff00);
 }
 
+.agencyTagline {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  height: 50px;
+  width: 350px;
+  font-size: 28px;
+  background: linear-gradient(150deg, #f993f745 60%, #fd7efb);
+  transform: rotate(1deg);
+  transition: all 0.4s ease;
+}
+
+.agencyTagline:hover {
+  transform: rotate(0deg) scale(1.05);
+  box-shadow: 0 0 20px 4px rgba(255, 80, 252, 0.6);
+  background: linear-gradient(150deg, #ff50fc4a 60%, #fd7efb);
+  border-color: rgba(255, 80, 252, 0.8);
+}
+
+.motivationTagline {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  height: 50px;
+  width: 450px;
+  font-weight: 500;
+  font-size: 28px;
+  background: linear-gradient(150deg, #FFFFFF26 60%, #fd7efb);
+  transform: rotate(-1deg);
+  transition: all 0.4s ease;
+}
+
+.motivationTagline:hover {
+  transform: rotate(0deg) scale(1.05);
+  box-shadow: 0 0 20px 4px rgba(255, 80, 252, 0.6);
+  background: linear-gradient(150deg, #ff50fc4a 60%, #fd7efb);
+  border-color: rgba(255, 80, 252, 0.8);
+}
 @media screen and (max-width: 768px) {
-  .seeAll{
+  .seeAll {
     width: 160px;
     height: 50px;
   }
