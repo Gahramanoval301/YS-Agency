@@ -1,5 +1,3 @@
-// src/components/AnimatedGradientText.tsx
-import React from "react";
 import type { FC} from 'react' 
 import styles from "./AnimatedGradientText.module.scss";
 import GradientText from "../../../styles/animations/GradientText";

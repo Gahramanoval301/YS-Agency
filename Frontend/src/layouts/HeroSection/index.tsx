@@ -6,7 +6,6 @@ import Header from '../../layouts/Header'
 import Footer from '../../layouts/Footer'
 import CircularText from '../../styles/animations/CircularText'
 import BrandsSwiper from '../../components/AnimatedSwipers/BrandsSwiper'
-import AgencyIntro from '../../components/About/AgencyIntro'
 
 const MainLayout = ({ title, showHeader = true, showFooter = true, showBrands = true, children }) => {
     const [isMounted, setIsMounted] = React.useState(false);

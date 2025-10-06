@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from "./LastBlogs.module.scss"
 import Gallery1 from "../../../assets/images/Gallery/gallery1.png";
 import Gallery2 from "../../../assets/images/Gallery/gallery2.png";
@@ -42,7 +41,7 @@ const LastBlogs = () => {
             <div className={styles.lastBlogsContainer}>
                 <div className={styles.topBlogDesign}></div>
                 {
-                    LAST_BLOGS_DATA.map(({ id, imgUrl, date, title, blogUrl }) => (
+                    LAST_BLOGS_DATA.map(({ id, imgUrl, date, title }) => (
                         <div className={styles.blogWrapper} key={id}>
                             <div className={styles.imageWrapper}>
                                 <img src={imgUrl} alt={title} />

@@ -1,5 +1,4 @@
-// src/components/AnimatedText.tsx
-import React from "react";
+
 import type { FC } from "react";
 import styles from "./AnimatedText.module.scss";
 import SplitText from "../../../styles/animations/SplitText";

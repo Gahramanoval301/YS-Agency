@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from "./MotivationIntro.module.scss";
 import GlareHover from '../../../styles/animations/GlareHover';
 

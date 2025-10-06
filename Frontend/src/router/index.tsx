@@ -1,6 +1,7 @@
 // src/router/index.tsx
 import { createBrowserRouter } from "react-router-dom";
-import { lazy, Suspense, type JSX } from "react";
+// import { lazy, Suspense, type JSX } from "react";
+import { Suspense, type JSX } from "react";
 import Home from "../pages/Home";
 import About from "../pages/About";
 import Services from "../pages/Services";

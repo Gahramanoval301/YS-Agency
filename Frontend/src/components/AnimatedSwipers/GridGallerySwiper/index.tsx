@@ -1,4 +1,3 @@
-import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Grid, Pagination } from "swiper/modules";
 import Gallery1 from "../../../assets/images/Gallery/gallery1.png";

@@ -1,13 +1,9 @@
-import React from 'react'
 import PillNav from '../../components/Header/PillNav'
 import styles from "./Header.module.scss"
 import SidebarNav from '../SidebarNav'
-import { Texture } from 'ogl'
 import { MENU_ITEMS } from '../../constants/menuItems'
 
 const Header = () => {
-
-
     const socialItems = [
         // { label: 'Twitter', link: 'https://twitter.com' },
         // { label: 'GitHub', link: 'https://github.com' },

@@ -1,5 +1,4 @@
 // src/pages/Home.tsx
-import React from "react";
 import type { FC } from "react";
 import Spline from "@splinetool/react-spline";
 import styles from "./Home.module.scss";

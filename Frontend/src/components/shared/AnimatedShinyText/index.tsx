@@ -1,4 +1,3 @@
-import React from "react";
 import type { FC } from "react";
 import styles from "./AnimatedShinyText.module.scss";
 import ShinyText from "../../../styles/animations/ShinyText";

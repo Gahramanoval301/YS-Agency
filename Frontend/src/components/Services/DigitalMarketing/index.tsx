@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./DigitalMarketing.module.scss";
 import SplitTextAnimation from "../../../styles/animations/AnimatedSplitText";
 
-const MARKETING_DATA = {
+type Category = {
+    title: string;
+    options: string[];
+};
+
+const MARKETING_DATA: Record<string, Category> = {
     brand: {
         title: "Brend",
         options: [
@@ -39,7 +44,7 @@ const MARKETING_DATA = {
 };
 
 const DigitalMarketing = () => {
-    const [activeCategory, setActiveCategory] = useState(null);
+    const [activeCategory, setActiveCategory] = useState<Category | null>(null); // ✅ explicitly typed
 
     return (
         <div className={styles.digitalMarketingContainer}>
@@ -48,10 +53,9 @@ const DigitalMarketing = () => {
                 {Object.values(MARKETING_DATA).map((category, idx) => (
                     <div
                         key={idx}
-                        className={`${styles.serviceCard} ${activeCategory?.title === category.title
-                            ? styles.activeCard
-                            : ""
-                            }`}
+                        className={`${styles.serviceCard} ${
+                            activeCategory?.title === category.title ? styles.activeCard : ""
+                        }`}
                         onMouseEnter={() => setActiveCategory(category)}
                         onMouseLeave={() => setActiveCategory(null)}
                     >
@@ -69,9 +73,8 @@ const DigitalMarketing = () => {
             {/* Right side — dynamic options */}
             <div className={styles.optionsContainer}>
                 <SplitTextAnimation />
-                <div className={styles.splitTextAnimationWrapper}>
-                </div>
-                {activeCategory ? (
+                <div className={styles.splitTextAnimationWrapper}></div>
+                {activeCategory && (
                     <ul className={styles.serviceCardList}>
                         {activeCategory.options.map((option, i) => (
                             <li key={i} className={styles.serviceCardItem}>
@@ -80,9 +83,8 @@ const DigitalMarketing = () => {
                             </li>
                         ))}
                     </ul>
-                ) : null}
+                )}
             </div>
-
         </div>
     );
 };
