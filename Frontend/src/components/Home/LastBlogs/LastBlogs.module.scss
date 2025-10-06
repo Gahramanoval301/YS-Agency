@@ -1,0 +1,288 @@
+.blogsSection {
+    width: 80%;
+    margin-inline: auto;
+
+    .blogsHeadline {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+
+        h2 {
+            font-size: 64px;
+            font-weight: 600;
+        }
+
+        a {
+            color: #FFFFFF66;
+            font-size: 28px;
+            transition: all 0.3s ease;
+
+            &:hover {
+                color: #fff;
+                font-size: 30px;
+            }
+        }
+    }
+}
+
+.lastBlogsContainer {
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+    margin-bottom: 5rem;
+    position: relative;
+
+    .topBlogDesign {
+        position: absolute;
+        bottom: 0px; // pull it above footer
+        left: 50%;
+        width: 50%;
+        height: 250%;
+
+        background: radial-gradient(circle at center,
+                #FF50FC 0%,
+                #ff50fc4f 40%,
+                transparent 80%);
+
+        filter: blur(80px); // ✅ soft glow
+        animation: moveGlow 6s linear infinite;
+        pointer-events: none; // don't block clicks
+    }
+
+    .blogWrapper {
+        position: relative;
+        border: 1px solid rgba(83, 83, 83, 0.4);
+        border-radius: 16px;
+        padding: 25px;
+        background: rgba(83, 83, 83, 0.15);
+        backdrop-filter: blur(6px);
+        box-shadow: 0 0 12px rgba(255, 80, 252, 0.08);
+        overflow: hidden;
+        transition: all 0.4s ease;
+        z-index: 0; // ensure pseudo element stays behind
+
+        &:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 0 25px rgba(255, 80, 252, 0.25);
+            border-color: rgba(255, 80, 252, 0.4);
+            background: rgba(83, 83, 83, 0.25);
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            padding: 1px;
+            background: linear-gradient(90deg, #ff50fc, #6f44c6, #ff50fc);
+            background-size: 200% 200%;
+            animation: borderGradient 4s ease infinite;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            -webkit-mask-composite: destination-out;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        &:hover::before {
+            opacity: 1;
+        }
+
+        .imageWrapper,
+        .dateWrapper,
+        h3,
+        .readMoreWrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        .imageWrapper {
+            border-radius: 10px;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                transition: transform 0.6s ease;
+            }
+
+            &:hover img {
+                transform: scale(1.05);
+            }
+        }
+
+        .dateWrapper {
+            margin-top: 1rem;
+            width: fit-content;
+            padding: 10px 20px;
+            background: linear-gradient(40deg, #ff50fc, #262626);
+            border-radius: 2px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background: linear-gradient(40deg, #ff7cff, #6f44c6);
+                transform: translateY(-2px);
+            }
+        }
+
+        h3 {
+            font-weight: 700;
+            font-size: 20px;
+            letter-spacing: 0.8px;
+            margin-top: 10px;
+            color: #fff;
+            transition: color 0.3s ease;
+
+            .blogWrapper:hover & {
+                color: #ff50fc;
+            }
+        }
+
+        .readMoreWrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 1.5rem;
+            color: #ff50fc;
+            font-size: 17px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover {
+                color: #fff;
+                transform: translateX(5px);
+            }
+
+            svg {
+                transition: transform 0.3s ease;
+            }
+
+            &:hover svg {
+                transform: translateX(5px);
+            }
+        }
+    }
+}
+
+@keyframes borderGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .blogsSection {
+        width: 97%;
+    }
+
+    .lastBlogsContainer {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .blogsSection {
+        .blogsHeadline {
+            margin-bottom: 0rem;
+
+            h2 {
+                font-size: 48px;
+            }
+
+            a {
+                font-size: 24px;
+
+                &:hover {
+                    font-size: 26px;
+                }
+            }
+        }
+    }
+
+    .lastBlogsContainer {
+        padding-bottom: 2rem;
+        margin-bottom: 2rem;
+
+        .blogWrapper {
+            padding: 10px;
+
+
+            h3 {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .blogsSection {
+        width: 80%;
+
+        .blogsHeadline {
+            h2 {
+                font-size: 32px;
+            }
+
+            a {
+                font-size: 20px;
+
+                &:hover {
+                    font-size: 22px;
+                }
+            }
+        }
+    }
+
+    .lastBlogsContainer {
+        grid-template-columns: 1fr;
+
+        .blogWrapper {
+            padding: 25px;
+
+
+            h3 {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 456px) {
+    .blogsSection {
+        width: 97%;
+    }
+
+    .lastBlogsContainer {
+        grid-template-columns: 1fr;
+    }
+}
+
+@keyframes moveGlow {
+    0% {
+        transform: translateX(50%) translateY(-10%);
+    }
+
+    50% {
+        transform: translateX(30%) translateY(-5%); // move slightly forward/up
+    }
+
+    100% {
+        transform: translateX(50%) translateY(-10%);
+    }
+}

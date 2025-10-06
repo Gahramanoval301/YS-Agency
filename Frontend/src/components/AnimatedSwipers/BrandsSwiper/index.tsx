@@ -13,6 +13,7 @@ import styles from './BrandsSwiper.module.scss';
 
 // import required modules
 import { Navigation } from 'swiper/modules';
+import { Link } from 'react-router';
 
 const BRANDS = [
     {
@@ -57,6 +58,7 @@ export default function BrandsSwiper() {
 
     return (
         <div className={styles.brandsSwiperWrapper}>
+            <Link to={"/"}>See all</Link>
             <div className={styles.btnContainer}>
                 <button ref={prevRef} className={styles.prevButton}>LEFT</button>
                 <button ref={nextRef} className={styles.nextButton} style={{

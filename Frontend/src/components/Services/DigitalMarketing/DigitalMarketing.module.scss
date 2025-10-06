@@ -1,0 +1,234 @@
+.digitalMarketingContainer {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2.5rem;
+    margin-bottom: 4rem;
+    padding-bottom: 2rem;
+
+    .serviceCard {
+        position: relative;
+        padding: 2rem;
+        border-radius: 20px;
+        overflow: hidden;
+        margin-top: 2rem;
+        transition: all 0.4s ease;
+        cursor: pointer;
+
+        background: #ffffff15;
+        /* inner content background */
+
+        div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            h3 {
+                font-size: 24px;
+            }
+        }
+
+        .number {
+            font-weight: 500;
+            font-size: 30px;
+            color: #FFFFFF66;
+            transition: all 0.4s ease;
+
+        }
+
+
+        div.titleWrapper {
+            .iconWrapper {
+                transition: all 0.4s ease;
+                width: 64px;
+                height: 64px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                padding: 1rem;
+                border-radius: 12px;
+                overflow: hidden;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    inset: 0;
+                    padding: 2px;
+                    border-radius: 50%;
+                    background: linear-gradient(45deg, #ff6ec500, #7773f500);
+                    -webkit-mask:
+                        linear-gradient(#fff 0 0) content-box,
+                        linear-gradient(#fff 0 0);
+                    -webkit-mask-composite: destination-out;
+                    mask-composite: exclude;
+                    pointer-events: none;
+                    transition: opacity 0.4s ease;
+                }
+
+                span {
+                    display: inline-block; // ensures transform works
+                    font-size: 24px;
+                    position: relative; // sits above the pseudo-element
+                    z-index: 1;
+                    transition: all 0.4s ease;
+                }
+            }
+
+
+        }
+
+
+        &:hover {
+            .number {
+                font-size: 80px;
+                font-weight: 600;
+
+                /* Gradient background */
+                background: linear-gradient(to bottom, #FFFFFF, #FF70FD);
+
+                /* Make gradient fill the text */
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+
+                /* Optional for other browsers */
+                background-clip: text;
+                color: transparent;
+            }
+
+            div.titleWrapper {
+                .iconWrapper {
+                    transition: all 0.4s ease;
+                    width: 64px;
+                    height: 64px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+                    padding: 1rem;
+                    border-radius: 12px;
+                    overflow: hidden;
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        inset: 0;
+                        padding: 2px;
+                        border-radius: 50%;
+                        background: linear-gradient(45deg, #ff6ec4, #7873f5);
+                        -webkit-mask:
+                            linear-gradient(#fff 0 0) content-box,
+                            linear-gradient(#fff 0 0);
+                        -webkit-mask-composite: destination-out;
+                        mask-composite: exclude;
+                        pointer-events: none;
+                        transition: opacity 0.4s ease;
+                    }
+
+                    span {
+                        display: inline-block; // ensures transform works
+                        transform: rotate(45deg);
+                        font-size: 24px;
+                        position: relative; // sits above the pseudo-element
+                        z-index: 1;
+                        transition: all 0.4s ease;
+                    }
+                }
+
+
+            }
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 4px;
+            /* thickness of bottom border */
+            background: linear-gradient(45deg, #F9DDFF, #FF9BFD, #8556E2);
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        /* full gradient border on hover */
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            padding: 4px;
+            /* thickness of full border */
+            border-radius: 20px;
+            background: linear-gradient(45deg, #F9DDFF, #FF9BFD, #8556E2);
+
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+
+            pointer-events: none;
+            opacity: 0;
+            /* hidden by default */
+            transition: opacity 0.3s ease;
+        }
+
+        &:hover::after {
+            opacity: 1;
+            /* show full border on hover */
+        }
+
+
+    }
+
+    .splitTextAnimationWrapper {
+        position: relative;
+        height: 50px;
+        margin-bottom: 2rem;
+    }
+
+    .splitTextAnimationWrapper::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 40px;
+
+        background: linear-gradient(90deg, #000000, #FFB2FE, #000000, #FFB2FE);
+
+        -webkit-mask-image: repeating-linear-gradient(to right,
+                #000 0 10px,
+                transparent 10px 20px);
+        -webkit-mask-repeat: repeat-x;
+        -webkit-mask-size: auto 100%;
+        mask-image: repeating-linear-gradient(to right,
+                #000 0 13px,
+                transparent 13px 22px);
+        mask-repeat: repeat-x;
+        mask-size: auto 100%;
+    }
+
+
+    .serviceCardList {
+        margin-top: 2rem;
+        display: grid;
+        grid-template-rows: repeat(3, auto);
+        justify-content: center;
+        grid-auto-flow: column;
+        gap: 10px 4rem;
+        list-style: none;
+        padding: 0;
+    }
+
+
+    .serviceCardItem {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #fff;
+    }
+
+}

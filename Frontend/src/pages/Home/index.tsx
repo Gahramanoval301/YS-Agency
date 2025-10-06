@@ -4,20 +4,17 @@ import type { FC } from "react";
 import Spline from "@splinetool/react-spline";
 import styles from "./Home.module.scss";
 import Particles from "../../styles/animations/Particles";
-import SplitText from "../../styles/animations/SplitText";
 import AnimatedText from "../../components/shared/AnimatedText";
-import ShinyText from "../../styles/animations/ShinyText";
 import AnimatedShinyText from "../../components/shared/AnimatedShinyText";
-import GradientText from "../../styles/animations/GradientText";
 import AnimatedGradientText from "../../components/shared/AnimatedGradientText";
-import Aurora from "../../styles/animations/AuroraBg";
 import Header from "../../layouts/Header";
 import GlareHover from "../../styles/animations/GlareHover";
 import ScrollDownIcon from "../../assets/icons/scroll-down.svg";
 import BrandsSwiper from "../../components/AnimatedSwipers/BrandsSwiper";
 import Footer from "../../layouts/Footer";
-
-
+import MixGallerySwiper from "../../components/AnimatedSwipers/GridGallerySwiper";
+import ServicesSwiper from "../../components/AnimatedSwipers/ServicesSwiper";
+import LastBlogs from "../../components/Home/LastBlogs";
 
 
 const Home: FC = () => {
@@ -89,9 +86,12 @@ const Home: FC = () => {
 
             </div>
 
+            <MixGallerySwiper />
+            <ServicesSwiper />
+            <LastBlogs/>
             <div className={styles.homeBodyWrapper}>
 
-                <div style={{
+                <div className="brandsSwiperContainer" style={{
                     height: "360px",
                     position: "relative",
                     marginBlock: "2rem"

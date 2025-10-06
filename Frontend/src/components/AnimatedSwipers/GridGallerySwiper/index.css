@@ -1,0 +1,37 @@
+.gridGallerySwiperContainer {
+  /* min-height: 900px; */
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #444;
+    height: calc((100% - 30px) / 2) !important;
+
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.gridGallerySwiperContainer {
+  .swiper {
+    padding-bottom: 5rem;
+
+    .swiper-pagination {
+      position: relative;
+      top: 20px;
+      z-index: 99999;
+
+      .swiper-pagination-bullet {
+        background-color: #a2a1a1;
+      }
+
+      .swiper-pagination-bullet-active {
+        opacity: 1;
+        width: 40px;
+        height: 40px;
+        background: url("/vite.svg") no-repeat center center;
+      }
+    }
+  }
+}

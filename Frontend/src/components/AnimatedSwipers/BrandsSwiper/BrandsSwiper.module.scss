@@ -4,6 +4,22 @@
     height: 360px;
     position: relative;
     margin-block: 2rem;
+
+    a {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        color: #FFFFFF66;
+        font-size: 28px;
+        transition: all 0.3s ease;
+        z-index: 20;
+
+        &:hover {
+            color: #fff;
+            font-size: 30px;
+        }
+    }
+
 }
 
 .slideWrapper {
@@ -16,7 +32,7 @@
     justify-content: center;
     align-items: center;
     z-index: auto;
-      mix-blend-mode: screen; // or lighten
+    mix-blend-mode: screen; // or lighten
 
 
     .dotLeft,
@@ -103,5 +119,25 @@
 
     button {
         color: #fff;
+    }
+}
+
+@media screen and (max-width:768px) {
+    a {
+        font-size: 24px;
+
+        &:hover {
+            font-size: 26px;
+        }
+    }
+}
+
+@media screen and (max-width:576px) {
+    a {
+        font-size: 20px;
+
+        &:hover {
+            font-size: 22px;
+        }
     }
 }
