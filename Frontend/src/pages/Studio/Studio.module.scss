@@ -1,0 +1,149 @@
+.studioContainer {
+
+    overflow: hidden;
+
+    .studioWrapper {
+        background-image: url("/bg_studio.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+    }
+
+    .studioContentWrapper {
+        min-height: 50vh;
+        position: relative;
+        top: -11rem;
+        width: 80%;
+        margin-inline: auto;
+
+        .titleContainer {
+            position: relative;
+            width: fit-content;
+            z-index: 1;
+            padding: 10px;
+
+            .titleWrapper {
+                display: inline-block;
+
+                h1 {
+                    display: inline-block;
+                    font-size: 110px;
+                    background: linear-gradient(90deg, #fff 60%, #FF50FC 90%, #fff);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                    /* For Firefox */
+                    font-weight: bold;
+                }
+            }
+
+            .circularTextWrapper {
+                display: inline-block;
+                position: absolute;
+                right: -10px;
+                top: 0px;
+                z-index: -1;
+            }
+
+        }
+
+        .contentWrapper {
+            width: 60%;
+            margin-top: 2rem;
+
+            p {
+                color: #FFFFFFCC;
+                font-size: 18px;
+                font-weight: 300;
+            }
+        }
+    }
+}
+
+@media screen and (max-width:1280px) {
+    .studioContainer {
+        .studioContentWrapper {
+            width: 90%;
+
+
+        }
+    }
+
+}
+
+@media screen and (max-width:1024px) {
+    .studioContainer {
+        .studioContentWrapper {
+
+            .titleContainer {
+                .titleWrapper {
+                    h1 {
+                        font-size: 100px;
+                    }
+                }
+            }
+
+            .contentWrapper {
+                width: 80%;
+
+            }
+
+        }
+    }
+}
+
+@media screen and (max-width:768px) {
+    .studioContainer {
+        .studioContentWrapper {
+            .titleContainer {
+                .titleWrapper {
+                    h1 {
+                        font-size: 80px;
+                    }
+                }
+
+                .circularTextWrapper {
+                    right: -20px;
+                    top: -10px;
+                }
+            }
+
+            .contentWrapper {
+                width: 90%;
+
+                p {
+                    font-size: 16px;
+                }
+
+            }
+
+
+        }
+    }
+}
+
+@media screen and (max-width:576px) {
+    .studioContainer {
+        .studioContentWrapper {
+            .titleContainer {
+                .titleWrapper {
+                    h1 {
+                        font-size: 64px;
+                    }
+
+                }
+            }
+
+            .contentWrapper {
+                width: 95%;
+
+                p {
+                    font-size: 15px;
+                }
+
+            }
+
+        }
+    }
+}

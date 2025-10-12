@@ -6,13 +6,13 @@
     background-color: #000; // solid black for better contrast
 
     .effectWrapper {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 85vh;
-            z-index: 10; // above everything
-            pointer-events: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 85vh;
+        z-index: 10; // above everything
+        pointer-events: none;
 
 
     }
@@ -93,6 +93,11 @@
 
             }
         }
+
+        .bottomWrapper {
+            width: 80%;
+            margin-inline: auto;
+        }
     }
 }
 
@@ -109,6 +114,11 @@
                         }
                     }
                 }
+            }
+
+            .bottomWrapper {
+                width: 97%;
+
             }
 
         }

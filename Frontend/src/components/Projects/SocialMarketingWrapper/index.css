@@ -1,0 +1,12 @@
+
+
+.socialMarketingSwiper .swiper {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.socialMarketingSwiper .swiper-slide {
+  font-size: 18px;
+}
+

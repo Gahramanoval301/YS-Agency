@@ -6,8 +6,9 @@ import Header from '../../layouts/Header'
 import Footer from '../../layouts/Footer'
 import CircularText from '../../styles/animations/CircularText'
 import BrandsSwiper from '../../components/AnimatedSwipers/BrandsSwiper'
+import ContactFormSection from '../../components/Contact/ContactFormSection'
 
-const MainLayout = ({ title, showHeader = true, showFooter = true, showBrands = true, children }) => {
+const MainLayout = ({ title, showHeader = true, showFooter = true, showBrands = true, children, isContact = false }) => {
     const [isMounted, setIsMounted] = React.useState(false);
     useEffect(() => { setIsMounted(true); }, []);
 
@@ -57,6 +58,9 @@ const MainLayout = ({ title, showHeader = true, showFooter = true, showBrands = 
 
                     <div className={styles.customDivider}></div>
                     {children}
+                </div>
+                {isContact && <ContactFormSection />}
+                <div className={styles.bottomWrapper}>
                     {showBrands && <BrandsSwiper />}
                 </div>
                 {showFooter && <Footer />}

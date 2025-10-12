@@ -5,6 +5,10 @@ import { Suspense, type JSX } from "react";
 import Home from "../pages/Home";
 import About from "../pages/About";
 import Services from "../pages/Services";
+import Studio from "../pages/Studio";
+import Contact from "../pages/Contact";
+import Projects from "../pages/Projects";
+import ProjectDetailsPage from "../pages/ProjectDetails";
 
 // Lazy load Home (good habit for future when more pages come in)
 // const Home = lazy(() => import("../pages/Home"));
@@ -26,6 +30,26 @@ export const router = createBrowserRouter([
     path: "/services",
     element: withSuspense(<Services />),
   },
+  {
+    path: "/studio",
+    element: withSuspense(<Studio />),
+  },
+  {
+    path: "/contact",
+    element: withSuspense(<Contact />),
+  },
+  {
+    path: "/projects",
+    element: withSuspense(<Projects />),
+  },
+  {
+    path: "/projects/:id",
+    element: withSuspense(<ProjectDetailsPage />),
+  },
+  // {
+  //   path: "/blogs",
+  //   element: withSuspense(<Blogs />),
+  // },
   {
     path: "*",
     element: <div>404 - Page Not Found</div>, // basic fallback

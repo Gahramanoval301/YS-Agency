@@ -1,0 +1,63 @@
+.photoGallerySwiper .swiper {
+  width: 100%;
+  overflow: visible; /* allow overflow for larger active slide */
+}
+
+.photoGallerySwiper .swiper-slide {
+  transition: transform 0.4s ease, opacity 0.4s ease, z-index 0.4s ease;
+  transform: scale(1);
+  transform-origin: left bottom; /* ✨ anchor scaling to bottom-left */
+  opacity: 0.7;
+  z-index: 1;
+}
+
+/* Active slide — bigger but keeps bottom aligned */
+.photoGallerySwiper .swiper-slide.swiper-slide-active {
+  transform: scale(1.4);
+  margin-right: 130px !important;
+  margin-left: 10px !important;
+  opacity: 1;
+  z-index: 10;
+}
+.photoGallerySwiper .swiper-slide.swiper-slide-active .imageWrapper {
+  border-right: 5px solid #ff5cfc;
+  border-bottom: 5px solid #ff5cfc;
+  position: relative;
+}
+.photoGallerySwiper .swiper-slide.swiper-slide-active .imageWrapper::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  right: 0;
+  border-bottom: 3px solid #fff;
+}
+
+.photoGallerySwiper .swiper-slide:not(.swiper-slide-active) {
+  filter: brightness(0.6);
+}
+
+@media screen and (max-width: 1150px) {
+  .photoGallerySwiper .swiper-slide.swiper-slide-active {
+    margin-right: 110px !important;
+  }
+}
+@media screen and (max-width: 950px) {
+  .photoGallerySwiper .swiper-slide.swiper-slide-active {
+    margin-right: 100px !important;
+  }
+}
+@media screen and (max-width: 756px) {
+  .photoGallerySwiper .swiper-slide.swiper-slide-active {
+    margin-right: 85px !important;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .photoGallerySwiper .swiper-slide.swiper-slide-active {
+    transform: scale(1.0);
+    margin-right: 20px !important;
+    margin-left: 0px !important;
+  }
+}

@@ -125,8 +125,15 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
+                <div className={styles.divider}>
+                </div>
+                <div className={styles.copyrightWrapper}>
+                    <p>Veb-sayt Webonly tərəfindən hazırlanıb.</p>
+                    <p>Copywrite @2025. Bütün hüquqlar qorunur. YS Agency.</p>
 
+                </div>
             </div>
+
         </div>
     )
 }
