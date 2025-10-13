@@ -1,0 +1,62 @@
+.blogsWrapperContainer {
+    overflow-x: hidden;
+
+    .searchWrapper {
+        display: flex;
+        justify-content: flex-end;
+
+        .inputContainer {
+            padding: 10px 16px;
+            border: 1px solid #FFFFFF33;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transform: translateY(-160px);
+            width: 360px;
+
+            input {
+                width: 340px;
+                color: #FFFFFF80;
+
+                &::placeholder {
+                    color: #FFFFFF80;
+                }
+            }
+        }
+    }
+
+    .filterBtnsContainer {
+        display: flex;
+        gap: 16px;
+
+        button {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(to right, #131313, #450744);
+            padding: 18px;
+            border-radius: 8px;
+            color: #FFFFFF;
+            font-size: 18px;
+        }
+    }
+}
+
+@media screen and (max-width:1280px) {
+    .blogsWrapperContainer {
+        .filterBtnsContainer {
+            gap: 8px;
+
+            button {
+                gap: 4px;
+                padding: 10px;
+                font-size: 16px;
+            }
+        }
+    }
+
+}
+
+@media screen and (max-width:900px) {}

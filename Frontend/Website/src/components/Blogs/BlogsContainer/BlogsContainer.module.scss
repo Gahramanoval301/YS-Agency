@@ -1,0 +1,494 @@
+.blogsContainer {
+    margin-top: 3.5rem;
+
+
+    .blogsGrid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+    }
+
+    .card {
+        width: 100%;
+        height: 380px;
+        margin: 1rem auto;
+        perspective: 1000px;
+        cursor: pointer;
+    }
+
+    .cardInner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+    }
+
+    .blogItem:not(.item1):not(.item1right) .card:hover .cardInner {
+        transform: rotateY(180deg);
+    }
+
+    .blogItem:not(.item1):not(.item1right) {
+
+        .cardFront,
+        .cardBack {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 11px;
+            padding: 1rem;
+        }
+
+        .cardFront {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: right;
+            border: 1.23px solid #535353;
+
+            box-shadow: inset -10px -9px 8px rgba(0, 0, 0, 1); // inner shadow
+
+            .dateWrapper {
+                margin-top: 1rem;
+                width: fit-content;
+                margin-left: auto;
+                padding: 10px 20px;
+                font-size: 16px;
+                border-radius: 4px;
+                background: linear-gradient(to right, #FF50FC, #2c2a2c);
+            }
+
+            .contentWrapper {
+                background: rgba(255, 255, 255, 0.2); // semi-transparent background
+                backdrop-filter: blur(4px); // applies blur to everything behind
+                -webkit-backdrop-filter: blur(4px); // for Sa
+                padding-inline: 2px;
+
+                p {
+                    font-size: 18px;
+                    font-weight: 600;
+                    margin-bottom: 8px;
+                }
+
+                .readMoreWrapper {
+                    display: inline-flex;
+                    gap: 8px;
+                    align-items: center;
+                    margin-bottom: 8px;
+
+                    span {
+                        font-size: 17px;
+                        background: linear-gradient(90deg, #FF50FC, #F8F8F8); // your gradient colors
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent; // makes text take the gradient
+                        display: inline-block; // optional, sometimes helps with rendering
+                    }
+
+
+                }
+
+                .tagContainer {
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                    gap: 4px;
+                    margin-left: auto;
+
+                    a {
+                        color: #FFFFFF99;
+                        text-decoration: underline;
+                        font-weight: 300;
+                    }
+                }
+            }
+
+        }
+
+        .cardBack {
+            background: linear-gradient(45deg, #2d2d2d 80%, #383838);
+            color: white;
+            transform: rotateY(180deg);
+
+            .dateWrapper {
+                width: fit-content;
+                padding: 10px 20px;
+                font-size: 16px;
+                border-radius: 4px;
+                background: linear-gradient(to right, #FF50FC, #2c2a2c);
+            }
+
+            .contentWrapper {
+
+                .headline {
+                    font-weight: 600;
+                    font-size: 18px;
+                    margin-block: 1rem;
+                }
+
+                .content {
+                    color: #ffffffb1;
+                    margin-bottom: 1rem;
+                }
+
+                .tagContainer {
+                    display: flex;
+                    gap: 6px;
+                    font-size: 14px;
+
+                    a {
+                        color: #ffffff8a;
+                        text-decoration: underline;
+                        font-weight: 300;
+                    }
+                }
+
+                .readMoreWrapper {
+                    margin-top: 1rem;
+                    gap: 8px;
+                    align-items: center;
+                    margin-bottom: 8px;
+
+                    span {
+                        font-size: 17px;
+                        background: linear-gradient(90deg, #FF50FC, #F8F8F8); // your gradient colors
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent; // makes text take the gradient
+                        display: inline-block; // optional, sometimes helps with rendering
+                    }
+
+
+                }
+            }
+
+        }
+
+    }
+
+    .item1 {
+        grid-column-start: 1;
+        grid-column-end: 3;
+
+        .cardFront,
+        .cardBack {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cardFront {
+            border: 1.23px solid #535353;
+            border-radius: 11px;
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            background: linear-gradient(45deg, #242424 80%, #242424);
+            box-shadow: inset -10px -9px 8px #000; // inner shadow
+            position: relative;
+            z-index: 999;
+
+
+            .contentWrapper {
+                padding-left: 1rem;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                .dateWrapper {
+                    width: fit-content;
+                    padding: 10px 20px;
+                    font-size: 16px;
+                    border-radius: 2px;
+                    background: linear-gradient(to right, #FF50FC, #2c2a2c);
+                }
+
+                .headline {
+                    font-size: 20px;
+                    font-weight: 600;
+                    margin-top: 8px;
+                }
+
+                .tagContainer {
+                    display: flex;
+                    gap: 6px;
+
+                    a {
+                        font-weight: 300;
+                        color: #FFFFFF99;
+                        text-decoration: underline;
+                    }
+                }
+
+                .readMoreWrapper {
+                    display: flex;
+                    gap: 6px;
+                    color: #FF50FC;
+                    font-size: 17px;
+                    margin-top: 6px;
+                }
+            }
+
+            .imageWrapper {
+                width: 100%;
+                height: 100%;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+
+        .cardBack {
+            background: #8b5cf6;
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+    }
+
+    .item1right {
+        grid-column-start: 3;
+        grid-column-end: 5;
+
+        .cardFront,
+        .cardBack {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+        }
+
+
+        .cardFront {
+            border: 1.23px solid #535353;
+            border-radius: 11px;
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            background: linear-gradient(45deg, #242424 80%, #242424);
+            box-shadow: inset -10px -9px 8px #000; // inner shadow
+            position: relative;
+            z-index: 999;
+
+
+            .contentWrapper {
+                padding-left: 1rem;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                .dateWrapper {
+                    width: fit-content;
+                    padding: 10px 20px;
+                    font-size: 16px;
+                    border-radius: 2px;
+                    background: linear-gradient(to right, #FF50FC, #2c2a2c);
+                }
+
+                .headline {
+                    font-size: 20px;
+                    font-weight: 600;
+                    margin-top: 8px;
+                }
+
+                .tagContainer {
+                    display: flex;
+                    gap: 6px;
+
+                    a {
+                        font-weight: 300;
+                        color: #FFFFFF99;
+                        text-decoration: underline;
+                    }
+                }
+
+                .readMoreWrapper {
+                    display: flex;
+                    gap: 6px;
+                    color: #FF50FC;
+                    font-size: 17px;
+                    margin-top: 6px;
+                }
+            }
+
+            .imageWrapper {
+                width: 100%;
+                height: 100%;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+
+        .cardBack {
+            background: #8b5cf6;
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+    }
+
+}
+
+@media screen and (max-width:1280px) {
+    .blogsContainer {
+        .blogsGrid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+
+        .item1 {
+            grid-column-start: 1;
+            grid-column-end: 3;
+
+        }
+
+        .item1right {
+            grid-column-start: 2;
+            grid-column-end: 4;
+        }
+    }
+}
+
+@media screen and (max-width:900px) {
+    .blogsContainer {
+        .blogsGrid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .blogItem {
+            grid-column-start: 1;
+            grid-column-end: 3;
+        }
+
+        .item1 {
+            grid-column-start: 1;
+            grid-column-end: 3;
+
+        }
+
+        .item1right {
+            grid-column-start: 1;
+            grid-column-end: 3;
+        }
+
+
+        .singleBlogItem {
+
+            .cardInner {
+                transform: rotate(0deg) !important;
+            }
+
+            .cardFront,
+            .cardBack {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                backface-visibility: hidden;
+            }
+
+            .cardFront.singleItem {
+                border: 1.23px solid #535353;
+                border-radius: 11px;
+                display: grid !important;
+                grid-template-columns: 1.3fr 1fr !important;
+                padding: 0px !important;
+                background: linear-gradient(45deg, #242424 80%, #242424);
+                box-shadow: inset -10px -9px 8px #000;
+                position: relative;
+                z-index: 999;
+                text-align: left !important;
+                align-items: center;
+
+                .textWrapper {
+                    padding-left: 1rem;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+
+                    .singleDateWrapper {
+                        width: fit-content;
+                        padding: 10px 20px;
+                        font-size: 16px;
+                        border-radius: 2px;
+                        background: linear-gradient(to right, #FF50FC, #2c2a2c);
+                    }
+
+                    .headline {
+                        font-size: 20px;
+                        font-weight: 600;
+                        margin-top: 8px;
+                    }
+
+                    .tagContainer {
+                        display: flex;
+                        gap: 6px;
+
+                        a {
+                            font-size: 16px !important;
+                            font-weight: 300;
+                            color: #FFFFFF99;
+                            text-decoration: underline;
+                        }
+                    }
+
+                    .readMoreWrapper {
+                        display: flex;
+                        gap: 6px;
+                        color: #FF50FC;
+                        font-size: 17px;
+                        margin-top: 6px;
+                    }
+                }
+
+                .imageWrapper {
+                    width: 100%;
+                    height: 100%;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+
+            }
+
+            .cardBack {
+                background: #8b5cf6;
+                color: white;
+                transform: rotateY(180deg);
+            }
+
+        }
+
+    }
+}
+
+@media screen and (max-width:550px) {
+    .blogsContainer {
+        .singleBlogItem {
+            .cardFront {
+                .contentWrapper {
+                    p {
+                        font-size: 16px !important;
+                    }
+
+                    .tagContainer {
+                        a {
+                            font-size: 13px !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

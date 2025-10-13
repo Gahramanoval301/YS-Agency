@@ -1,0 +1,115 @@
+.custom-select {
+  position: relative;
+  width: 220px;
+  font-family: "Inter", sans-serif;
+
+  .select-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid rgba(255, 255, 255, 0.763);
+    margin-top: 2rem;
+    max-width: 100px;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 34px;
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+    cursor: pointer;
+    background: linear-gradient(45deg, #7044C6, #FF50FC);
+    transition: all 0.3s ease;
+    transform: translateY(10px);
+    margin-left: auto;
+
+    &:hover {
+      transform: translateY(10px);
+      box-shadow: 0 6px 16px #ff50fc86;
+      opacity: 0.9; // soft fade
+    }
+
+    &:active {
+      transform: scale(0.96); // small click effect
+    }
+
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+    &:hover {
+      border-color: #6366f1;
+      box-shadow: 0 0 6px rgba(99, 102, 241, 0.4);
+    }
+
+    &.open {
+      border-color: #6366f1;
+      box-shadow: 0 0 8px rgba(99, 102, 241, 0.4);
+    }
+
+    .selected {
+      font-size: 15px;
+      color: white;
+
+      &.placeholder {
+        color: #9ca3af;
+      }
+    }
+
+    .arrow {
+      width: 8px;
+      height: 8px;
+      border-left: 2px solid #ffffff;
+      border-bottom: 2px solid #ffffff;
+      transform: rotate(-45deg);
+      transition: transform 0.3s ease;
+
+      &.up {
+        transform: rotate(135deg);
+      }
+    }
+  }
+
+  .options {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    border: 1.5px solid #d1d5db;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    max-height: 200px;
+    overflow-y: auto;
+    animation: fadeIn 0.25s ease;
+    z-index: 99999;
+
+    .option {
+      padding: 10px 14px;
+      cursor: pointer;
+      font-size: 15px;
+      color: #111827;
+      transition: background 0.25s ease;
+
+      &:hover {
+        background: #eef2ff;
+      }
+
+      &.active {
+        background: #e0e7ff;
+        color: #4f46e5;
+        font-weight: 600;
+      }
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
