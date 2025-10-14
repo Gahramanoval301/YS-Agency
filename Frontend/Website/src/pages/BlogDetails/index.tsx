@@ -1,9 +1,7 @@
 import { useParams } from 'react-router';
 import SingleBlogDetailsWrapper from '../../components/BlogDetails/SingleBlogDetailsWrapper'
-import styles from "./BlogDetails.module.scss"
 import { useEffect, useState } from 'react';
 import { BLOGS_DATA } from '../../components/Blogs/BlogsContainer';
-import SimilarBlogs from '../../components/BlogDetails/SimilarBlogs';
 
 interface socialMedia {
     type: string;

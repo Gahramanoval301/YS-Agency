@@ -1,0 +1,9 @@
+.bodyContentWrapper {
+  padding-inline: 2rem;
+}
+
+@media screen and (max-width: 756px) {
+  .bodyContentWrapper {
+    padding-inline: 0.5rem;
+  }
+}

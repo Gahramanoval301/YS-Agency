@@ -1,0 +1,16 @@
+.headerWrapper {
+  padding: 2rem;
+
+  .profileInfoWrapper {
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 5px 8px;
+    background: linear-gradient(to right, #1f1f1f 60%, #181818) padding-box,
+      linear-gradient(to left, #ffffff23, #ffffff31) border-box;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    display: inline-flex;
+    cursor: pointer;
+    min-width: 200px;
+  }
+}

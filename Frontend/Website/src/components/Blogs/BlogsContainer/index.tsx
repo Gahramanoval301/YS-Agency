@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from "./BlogsContainer.module.scss"
-import Gallery1 from "../../../assets/images/Gallery/gallery1.png";
 import Gallery2 from "../../../assets/images/Gallery/gallery2.png";
-import Gallery3 from "../../../assets/images/Gallery/gallery3.png";
 import BlogCard from './BlogCard';
 export const BLOGS_DATA = [
     {

@@ -1,0 +1,45 @@
+.sidebarWrapper {
+  width: 300px;
+  padding: 2rem;
+  border-right: 1px solid transparent;
+  border-image: linear-gradient(to bottom, #0e0914 20%, #ff5cfc 50%, #0e0914) 1;
+  display: inline-flex;
+  flex-direction: column;
+  min-height: 650px;
+  gap: 2rem;
+
+  .blurShineDesign {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 80%;
+
+    background: radial-gradient(
+      circle at center,
+      #ff50fc28 0%,
+      #ff50fc29 40%,
+      transparent 80%
+    );
+
+    filter: blur(120px);
+    animation: moveGlow 6s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .sidebarNavlink {
+    padding: 10px 14px;
+    border-radius: 8px;
+    color: #ffffff4d;
+    font-weight: 600;
+  }
+  .sidebarNavlink.sidebarActiveNavLink {
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: linear-gradient(80deg, #ff50fc 5%, #ede4ff 20%, #f53af2 100%);
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3);
+    color: #000;
+  }
+}

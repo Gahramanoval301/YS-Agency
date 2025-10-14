@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styles from "./BlogsWrapper.module.scss";
-import { filter, label } from "motion/react-client";
 import BlogsContainer from "../BlogsContainer";
 import CustomSelect from "../../shared/CustomSelect";
 

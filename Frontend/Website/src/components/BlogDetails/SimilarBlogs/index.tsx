@@ -2,7 +2,6 @@ import styles from "./SimilarBlogs.module.scss"
 import Gallery1 from "../../../assets/images/Gallery/gallery1.png";
 import Gallery2 from "../../../assets/images/Gallery/gallery2.png";
 import Gallery3 from "../../../assets/images/Gallery/gallery3.png";
-import { Link } from 'react-router';
 
 
 const SIMILAR_BLOGS_DATA = [

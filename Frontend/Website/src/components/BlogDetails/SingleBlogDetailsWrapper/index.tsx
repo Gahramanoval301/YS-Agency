@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from "./SingleBlogDetailsWrapper.module.scss"
 import Particles from '../../../styles/animations/Particles'
 import LightRays from '../../../styles/animations/LightRays'

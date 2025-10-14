@@ -1,5 +1,5 @@
 import styles from "./VideoSessionSliderWrapper.module.scss"
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 
 // Import Swiper React components
@@ -19,7 +19,7 @@ import { Navigation } from 'swiper/modules';
 const VideoSessionSliderWrapper = () => {
     const prevRef = useRef<HTMLButtonElement>(null);
     const nextRef = useRef<HTMLButtonElement>(null);
-    const [activeIndex, setActiveIndex] = useState(0);
+    // const [activeIndex, setActiveIndex] = useState(0);
     return (
         <div className={styles.videoSessionSliderContainer}>
             <h1>Videosessiya</h1>
@@ -32,7 +32,7 @@ const VideoSessionSliderWrapper = () => {
                     }}>➡</button>
                 </div>
                 <Swiper
-                    onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+                    // onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
                     loop={true}
                     breakpoints={{
                         0: { // mobile

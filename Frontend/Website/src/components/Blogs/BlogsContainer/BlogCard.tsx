@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from "./BlogsContainer.module.scss"
 import { Link, useNavigate } from 'react-router'
 
@@ -20,6 +20,9 @@ const BlogCard = ({ rowIndex, index, row, blog, chunkSize }) => {
     const [activeBlog, setActiveBlog] = useState<number | null>(0)
     const handleHover = (id: number) => setActiveBlog(id)
     const navigate = useNavigate();
+
+    console.log(activeBlog);
+    
 
     useEffect(() => {
         try {
