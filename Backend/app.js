@@ -1,28 +1,38 @@
 // app.js
-require("dotenv").config(); // ✅ Load environment variables
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const db = require("./models"); // ✅ Import Sequelize models & connection
+const db = require("./models");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 
 // Middlewares
-app.use(cors());
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); // good for forms
+app.use(cookieParser());
 
 // Routes
 app.use("/api", require("./routes/test"));
 app.use("/api/upload", require("./routes/upload"));
+app.use("/api/auth", require("./routes/authRoutes/index"));
+app.use("/api/about", require("./routes/aboutRoutes/index"));
+app.use("/api/blog", require("./routes/blogRoutes/index"));
+app.use("/api/category", require("./routes/blogRoutes/categoryRoutes"));
+app.use("/api/partner", require("./routes/partnerRoutes/index"));
 
 // Start server & sync database
 (async () => {
   try {
-    // ✅ Sync models (creates tables if they don't exist)
-    await db.sequelize.sync({ force: true });
+    await db.sequelize.sync();
 
-    // ✅ Ensure at least one user exists for testing
     const { User } = db;
     const count = await User.count();
     if (count === 0) {
@@ -30,7 +40,6 @@ app.use("/api/upload", require("./routes/upload"));
       console.log("Created starter user");
     }
 
-    // ✅ Start server
     app.listen(PORT, () => {
       console.log(`✅ Server listening on http://localhost:${PORT}`);
     });

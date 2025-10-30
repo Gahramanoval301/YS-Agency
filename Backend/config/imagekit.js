@@ -18,5 +18,46 @@ async function uploadImage(file) {
 
   return uploadResponse.url;
 }
+async function uploadImage(file) {
+  if (!file) return null;
 
-module.exports = { uploadImage };
+  const uploadResponse = await imagekit.upload({
+    file: file.buffer.toString("base64"), // if file in memory
+    fileName: file.originalname,
+    folder: "/app",
+  });
+
+  console.log(uploadResponse);
+
+  // Return both url and fileId
+  return {
+    url: uploadResponse.url,
+    fileId: uploadResponse.fileId,
+  };
+}
+const deleteImage = (fileId) => {
+  return new Promise((resolve, reject) => {
+    imagekit.deleteFile(fileId, (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    });
+  });
+};
+
+// async function uploadImage(file) {
+//   if (!file) return null;
+
+//   const uploadResponse = await imagekit.upload({
+//     file: file.buffer.toString("base64"), // if file is in memory
+//     fileName: file.originalname,
+//     folder: "/app", // your folder
+//   });
+
+//   // Return both URL and fileId
+//   return {
+//     url: uploadResponse.url,
+//     fileId: uploadResponse.fileId,
+//   };
+// }
+
+module.exports = { uploadImage, deleteImage };
