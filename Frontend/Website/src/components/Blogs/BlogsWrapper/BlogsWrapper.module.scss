@@ -1,7 +1,8 @@
 .blogsWrapperContainer {
-    overflow-x: hidden;
+    // overflow-x: hidden;
 
     .searchWrapper {
+        border: 2px solid red($color: #000000);
         display: flex;
         justify-content: flex-end;
 
@@ -42,6 +43,20 @@
             font-size: 18px;
         }
     }
+
+    .blogPaginationWrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        gap: 1rem;
+
+        .mainBtn {
+            color: #fff;
+            font-size: 17px;
+        }
+    }
+
 }
 
 @media screen and (max-width:1280px) {

@@ -1,0 +1,22 @@
+.socialMediasWrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .iconWrapper {
+        width: 40px;
+        height: 40px;
+        border: 0.4px solid transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background:
+            linear-gradient(140deg, #000 60%, #000) padding-box,
+            linear-gradient(to left, #000000, #FFFFFFE0) border-box;
+        background-origin: border-box;
+        background-clip: padding-box, border-box;
+        color: #fff;
+        cursor: pointer;
+    }
+}
