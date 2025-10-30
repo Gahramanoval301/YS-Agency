@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import "./CustomSelect.scss";
+import type { CategoryProps } from "../../../api/blog";
 
 interface OptionProp {
   label: string;
@@ -7,9 +8,9 @@ interface OptionProp {
 }
 
 interface CustomSelectProps {
-  options: OptionProp[];
+  options: CategoryProps[];
   placeholder?: string;
-  onChange: (option: OptionProp) => void;
+  onChange: (option: CategoryProps) => void;
   defaultValue?: string;
   selectContainerStyles?: React.CSSProperties;
   selectBoxStyles?: React.CSSProperties;
@@ -24,7 +25,7 @@ const CustomSelect = ({
   selectBoxStyles,
 }: CustomSelectProps) => {
   // 🟢 Selected should store OptionProp or null
-  const [selected, setSelected] = useState<OptionProp | null>(null);
+  const [selected, setSelected] = useState<CategoryProps | null>(null);
   const [isOpen, setIsOpen] = useState(false);
 
   // 🟢 dropdownRef must be a ref to a div element
@@ -33,7 +34,7 @@ const CustomSelect = ({
   // Set default value on mount
   useEffect(() => {
     if (defaultValue) {
-      const foundOption = options.find((opt) => opt.value === defaultValue);
+      const foundOption = options.find((opt) => opt.id === defaultValue);
       if (foundOption) {
         setSelected(foundOption);
       }
@@ -42,7 +43,7 @@ const CustomSelect = ({
 
   const toggleDropdown = () => setIsOpen((prev) => !prev);
 
-  const handleSelect = (option: OptionProp) => {
+  const handleSelect = (option: CategoryProps) => {
     setSelected(option);
     setIsOpen(false);
     onChange(option);
@@ -74,7 +75,7 @@ const CustomSelect = ({
         style={selectBoxStyles}
       >
         <span className={`selected ${!selected ? "placeholder" : ""}`}>
-          {selected ? selected.label : placeholder}
+          {selected ? selected.title : placeholder}
         </span>
         <div className={`arrow ${isOpen ? "up" : ""}`} />
       </div>
@@ -83,13 +84,13 @@ const CustomSelect = ({
         <div className="options">
           {options.map((option) => (
             <div
-              key={option.value}
+              key={option.id}
               className={`option ${
-                selected?.value === option.value ? "active" : ""
+                selected?.id === option.id ? "active" : ""
               }`}
               onClick={() => handleSelect(option)}
             >
-              {option.label}
+              {option.title}
             </div>
           ))}
         </div>

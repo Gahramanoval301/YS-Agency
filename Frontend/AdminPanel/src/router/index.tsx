@@ -1,6 +1,5 @@
 // src/router/index.tsx
 import { createBrowserRouter } from "react-router-dom";
-// import { lazy, Suspense, type JSX } from "react";
 import { Suspense, type JSX } from "react";
 import Home from "../pages/Home";
 import Dashboard from "../pages/Dashboard";
@@ -11,10 +10,9 @@ import Contact from "../pages/Contact";
 import Services from "../pages/Services";
 import Partners from "../pages/Partners";
 import About from "../pages/About";
-
-
-// Lazy load Home (good habit for future when more pages come in)
-// const Home = lazy(() => import("../pages/Home"));
+import Auth from "../pages/Auth";
+import Login from "../pages/Login";
+import ProtectedRoute from "./ProtectedRoute";
 
 const withSuspense = (element: JSX.Element) => (
   <Suspense fallback={<div>Loading...</div>}>{element}</Suspense>
@@ -22,44 +20,52 @@ const withSuspense = (element: JSX.Element) => (
 
 export const router = createBrowserRouter([
   {
+    path: "/login",
+    element: withSuspense(<Login />),
+  },
+  {
+    path: "/auth",
+    element: <ProtectedRoute element={withSuspense(<Auth />)} />,
+  },
+  {
     path: "/",
-    element: withSuspense(<Dashboard/>),
+    element: <ProtectedRoute element={withSuspense(<Dashboard />)} />,
   },
   {
     path: "/home",
-    element: withSuspense(<Home />),
+    element: <ProtectedRoute element={withSuspense(<Home />)} />,
   },
   {
     path: "/studio",
-    element: withSuspense(<Studio />),
+    element: <ProtectedRoute element={withSuspense(<Studio />)} />,
   },
   {
     path: "/projects",
-    element: withSuspense(<Projects />),
+    element: <ProtectedRoute element={withSuspense(<Projects />)} />,
   },
   {
     path: "/blogs",
-    element: withSuspense(<Blogs />),
+    element: <ProtectedRoute element={withSuspense(<Blogs />)} />,
   },
   {
     path: "/contact",
-    element: withSuspense(<Contact />),
+    element: <ProtectedRoute element={withSuspense(<Contact />)} />,
   },
   {
     path: "/services",
-    element: withSuspense(<Services />),
+    element: <ProtectedRoute element={withSuspense(<Services />)} />,
   },
   {
     path: "/partners",
-    element: withSuspense(<Partners />),
+    element: <ProtectedRoute element={withSuspense(<Partners />)} />,
   },
   {
     path: "/about",
-    element: withSuspense(<About />),
+    element: <ProtectedRoute element={withSuspense(<About />)} />,
   },
 
   {
     path: "*",
-    element: <div>404 - Page Not Found</div>, // basic fallback
+    element: <div>404 - Page Not Found</div>,
   },
 ]);

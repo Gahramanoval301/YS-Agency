@@ -2,6 +2,9 @@ import styles from "./SimilarBlogs.module.scss"
 import Gallery1 from "../../../assets/images/Gallery/gallery1.png";
 import Gallery2 from "../../../assets/images/Gallery/gallery2.png";
 import Gallery3 from "../../../assets/images/Gallery/gallery3.png";
+import { useEffect, useState } from "react";
+import { getLastBlogs, type BlogProps } from "../../../api/blog";
+import { formatDate } from "../../../utils/formatDate";
 
 
 const SIMILAR_BLOGS_DATA = [
@@ -28,20 +31,31 @@ const SIMILAR_BLOGS_DATA = [
   },
 ]
 const SimilarBlogs = () => {
+
+  const [lastBlogs, setLastBlogs] = useState(null)
+
+  async function fetchLastBlogs() {
+    const resData = await getLastBlogs();
+    setLastBlogs(resData);
+  }
+  useEffect(() => {
+    fetchLastBlogs();
+  }, [])
+
   return (
     <div>
-      <h4>Oxsar Bloglar</h4>
+      <h4>Last Blogs</h4>
       <div className={styles.lastBlogsContainer}>
         {
-          SIMILAR_BLOGS_DATA.map(({ id, imgUrl, date, title }) => (
+          lastBlogs && lastBlogs.map(({ id, blogImgUrl, createdAt, blogTitle }: BlogProps) => (
             <div className={styles.blogWrapper} key={id}>
               <div className={styles.imageWrapper}>
-                <img src={imgUrl} alt={title} />
+                <img src={blogImgUrl} alt={blogTitle} />
               </div>
               <div className={styles.dateWrapper}>
-                {date}
+                {formatDate(createdAt)}
               </div>
-              <h3>{title}</h3>
+              <h3>{blogTitle}</h3>
               <div className={styles.readMoreWrapper}>
                 <p>Read More</p>
                 <span>➡</span>

@@ -1,7 +1,9 @@
 import styles from "./AgencyIntro.module.scss";
 import GlareHover from '../../../styles/animations/GlareHover';
+import type { AboutFormValues } from "../../../api/about";
+import HtmlParser from "../../shared/HtmlParser";
 
-const AgencyIntro = () => {
+const AgencyIntro = ({ data }: { data: AboutFormValues }) => {
     return (
         <div className={styles.sectionContainer}>
             <div className={styles.introWrapper}>
@@ -15,30 +17,11 @@ const AgencyIntro = () => {
                     playOnce={false}
                     className="agencyTagline"
                 >
-                    <h5>Gəncik, mobil və sosialıq!</h5>
+                    <h5>{data.texts[0].headline}</h5>
                 </GlareHover>
 
-                <p>
+                <HtmlParser data={data.texts[0].content} />
 
-                    <p>
-                        <p>
-
-                            Peşəkar və enerjili komandamız brendinq, rəqəmsal marketinq və dizayn sahələrində geniş təcrübəyə malikdir, bu da bizə fərdi yanaşmalar yaratmağa və nəticə verən həllər təqdim etməyə imkan verir.
-                        </p>
-                        <p>
-                            Yeni və dinamik yanaşmamız şablonları qırır və brendinizə uyğun unikal strategiyalar təqdim edir.
-                        </p>
-                        <p>
-
-                            Biz biznesinizin tələblərinə uyğun qeyri-adi həllər hazırlayırıq.
-                        </p>
-                    </p>
-                </p>
-
-                <p>
-                    Fəlsəfəmiz və təcrübəmiz şablonları qırmağa və hər müştəriyə fərdi yanaşma tapmağa imkan verir. Biz brendin inkişafına, strateji yanaşmaya və yaradıcı dizayna yönəlmişik və yaradıcı mükəmməllik prinsiplərinə sadiq qalırıq.
-                    Brendi inkişaf etdirmək üçün strateji yanaşmalar tətbiq edir və kreativ dizaynla irəliləyirik. Yaradıcı mükəmməlliyə olan bağlılığımız isə işimizin əsasını təşkil edir.
-                </p>
             </div>
         </div>
     );

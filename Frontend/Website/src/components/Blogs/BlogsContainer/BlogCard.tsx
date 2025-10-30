@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import styles from "./BlogsContainer.module.scss"
 import { Link, useNavigate } from 'react-router'
+import type { CategoryProps } from '../../../api/blog'
+import HtmlParser from '../../shared/HtmlParser'
+import { formatDate } from '../../../utils/formatDate'
 
 const BlogCard = ({ rowIndex, index, row, blog, chunkSize }) => {
     // Determine dynamic class
@@ -22,7 +25,7 @@ const BlogCard = ({ rowIndex, index, row, blog, chunkSize }) => {
     const navigate = useNavigate();
 
     console.log(activeBlog);
-    
+
 
     useEffect(() => {
         try {
@@ -54,7 +57,7 @@ const BlogCard = ({ rowIndex, index, row, blog, chunkSize }) => {
 
     return (
         <div
-            onClick={() => navigate(`/blogs/${blog.id}`)}
+            onClick={() => navigate(`/blogs/${blog.slug}`)}
             key={blog.id + index}
             className={`${styles.blogItem} ${dynamicClass} ${isWideItem ? styles.wideItem : ''}`}
             onMouseEnter={() => handleHover(blog.id)}
@@ -66,19 +69,23 @@ const BlogCard = ({ rowIndex, index, row, blog, chunkSize }) => {
                             <div className={styles.cardFront}>
                                 <div className={styles.contentWrapper}>
                                     <div className={styles.dateWrapper}>
-                                        {blog.date}
+                                        {formatDate(blog.createdAt)}
                                     </div>
-                                    <p className={styles.headline}>{blog.title}</p>
+                                    <p className={styles.headline}>{blog.blogTitle}</p>
 
                                     <div className={styles.tagContainer}>
-                                        {
-                                            blog.tags.map(tag => (
-                                                <Link to={"/"}>
-                                                    {tag}
-                                                </Link>
-                                            ))
-                                        }
+                                        {blog.Tags.map((tag: CategoryProps) => (
+                                            <Link
+                                                key={tag.id}
+                                                to={`/blogs?tag=${tag.id}`}
+                                                onClick={(e) => e.stopPropagation()} 
+                                            >
+                                                {tag.title}
+                                            </Link>
+                                        ))}
                                     </div>
+
+
 
                                     <div className={styles.readMoreWrapper}>
                                         <span>Read More</span>
@@ -86,7 +93,7 @@ const BlogCard = ({ rowIndex, index, row, blog, chunkSize }) => {
                                     </div>
                                 </div>
                                 <div className={styles.imageWrapper}>
-                                    <img src={blog.imgUrl} />
+                                    <img src={blog.blogImgUrl} />
                                 </div>
                             </div>
                         </div>
@@ -100,15 +107,15 @@ const BlogCard = ({ rowIndex, index, row, blog, chunkSize }) => {
                                     >
                                         <div className={styles.textWrapper}>
                                             <div className={styles.singleDateWrapper}>
-                                                {blog.date}
+                                                {formatDate(blog.createdAt)}
                                             </div>
-                                            <p className={styles.headline}>{blog.title}</p>
+                                            <p className={styles.headline}>{blog.blogTitle}</p>
 
                                             <div className={styles.tagContainer}>
                                                 {
-                                                    blog.tags.map(tag => (
+                                                    blog.Tags.map((tag: CategoryProps) => (
                                                         <Link to={"/"}>
-                                                            {tag}
+                                                            {tag.title}
                                                         </Link>
                                                     ))
                                                 }
@@ -120,27 +127,27 @@ const BlogCard = ({ rowIndex, index, row, blog, chunkSize }) => {
                                             </div>
                                         </div>
                                         <div className={styles.imageWrapper}>
-                                            <img src={blog.imgUrl} />
+                                            <img src={blog.blogImgUrl} />
                                         </div>
                                     </div>
                                     :
                                     <div className={styles.cardFront}
-                                        style={{ backgroundImage: `url(${blog.imgUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+                                        style={{ backgroundImage: `url(${blog.blogImgUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
                                     >
                                         <div className={styles.dateWrapper}>
-                                            {blog.date}
+                                            {formatDate(blog.createdAt)}
                                         </div>
                                         <div className={styles.contentWrapper}>
-                                            <p>{blog.title}</p>
+                                            <p>{blog.blogTitle}</p>
                                             <div className={styles.readMoreWrapper}>
                                                 <span>Read More</span>
                                                 <i>🛑</i>
                                             </div>
                                             <div className={styles.tagContainer}>
                                                 {
-                                                    blog.tags.map(tag => (
+                                                    blog.Tags.map((tag: CategoryProps) => (
                                                         <Link to={"/"}>
-                                                            {tag}
+                                                            {tag.title}
                                                         </Link>
                                                     ))
                                                 }
@@ -150,17 +157,16 @@ const BlogCard = ({ rowIndex, index, row, blog, chunkSize }) => {
                                 }
                                 {!isWideItem && <div className={styles.cardBack}>
                                     <div className={styles.dateWrapper}>
-                                        {blog.date}
-                                    </div>
+                                        {formatDate(blog.createdAt)}                                    </div>
                                     <div className={styles.contentWrapper}>
-                                        <p className={styles.headline}>{blog.title}</p>
+                                        <p className={styles.headline}>{blog.blogTitle}</p>
 
-                                        <p className={styles.content}>{blog.content.slice(0, 200)}...</p>
-                                        <div className={styles.tagContainer}>
+                                        <p className={styles.content}>
+                                            <HtmlParser data={blog.blogContent.slice(0, 200)} />...</p>                                        <div className={styles.tagContainer}>
                                             {
-                                                blog.tags.map(tag => (
+                                                blog.Tags.map((tag: CategoryProps) => (
                                                     <Link to={"/"}>
-                                                        {tag}
+                                                        {tag.title}
                                                     </Link>
                                                 ))
                                             }
@@ -177,22 +183,22 @@ const BlogCard = ({ rowIndex, index, row, blog, chunkSize }) => {
                         >
                             <div className={styles.cardInner}>
                                 <div className={styles.cardFront}
-                                    style={{ backgroundImage: `url(${blog.imgUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+                                    style={{ backgroundImage: `url(${blog.blogImgUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
                                 >
                                     <div className={styles.dateWrapper}>
-                                        {blog.date}
+                                        {formatDate(blog.createdAt)}
                                     </div>
                                     <div className={styles.contentWrapper}>
-                                        <p>{blog.title}</p>
+                                        <p>{blog.blogTitle}</p>
                                         <div className={styles.readMoreWrapper}>
                                             <span>Read More</span>
                                             <i>🛑</i>
                                         </div>
                                         <div className={styles.tagContainer}>
                                             {
-                                                blog.tags.map(tag => (
+                                                blog.Tags.map((tag: CategoryProps) => (
                                                     <Link to={"/"}>
-                                                        {tag}
+                                                        {tag.title}
                                                     </Link>
                                                 ))
                                             }
@@ -201,17 +207,18 @@ const BlogCard = ({ rowIndex, index, row, blog, chunkSize }) => {
                                 </div>
                                 {!isWideItem && <div className={styles.cardBack}>
                                     <div className={styles.dateWrapper}>
-                                        {blog.date}
+                                        {formatDate(blog.createdAt)}
                                     </div>
                                     <div className={styles.contentWrapper}>
-                                        <p className={styles.headline}>{blog.title}</p>
+                                        <p className={styles.headline}>{blog.blogTitle}</p>
 
-                                        <p className={styles.content}>{blog.content.slice(0, 200)}...</p>
+                                        <p className={styles.content}>
+                                            <HtmlParser data={blog.blogContent.slice(0, 200)} />...</p>
                                         <div className={styles.tagContainer}>
                                             {
-                                                blog.tags.map(tag => (
+                                                blog.Tags.map((tag: CategoryProps) => (
                                                     <Link to={"/"}>
-                                                        {tag}
+                                                        {tag.title}
                                                     </Link>
                                                 ))
                                             }

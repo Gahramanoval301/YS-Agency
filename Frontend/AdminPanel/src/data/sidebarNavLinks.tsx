@@ -11,7 +11,7 @@ export const SIDEBAR_NAV_LINKS = [
   },
   {
     label: "Haqqımızda",
-    link: "",
+    link: "/about",
     Icon: ""
   },
   {
@@ -36,12 +36,17 @@ export const SIDEBAR_NAV_LINKS = [
   },
   {
     label: "Blog",
-    link: "",
+    link: "/blogs",
     Icon: ""
   },
   {
     label: "Əlaqə",
     link: "",
+    Icon: ""
+  },
+  {
+    label: "Auth",
+    link: "/auth",
     Icon: ""
   },
 ]

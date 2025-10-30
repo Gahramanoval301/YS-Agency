@@ -5,7 +5,8 @@ import Header from '../../../layouts/Header'
 import BlogSingleContentWrapper from '../BlogSingleContentWrapper'
 import Footer from '../../../layouts/Footer'
 import SimilarBlogs from '../SimilarBlogs'
-const SingleBlogDetailsWrapper = ({ data }) => {
+import type { BlogProps } from "../../../api/blog"
+const SingleBlogDetailsWrapper = ({ data }:{data:BlogProps}) => {
 
     return (
         <div className={styles.singleBlogDetailsWrapperContainer}>
@@ -41,7 +42,7 @@ const SingleBlogDetailsWrapper = ({ data }) => {
                         </a>
                         <i>&gt;</i>
                         <a href="">
-                            {data.title}
+                            {data.blogTitle}
                         </a>
                     </div>
 

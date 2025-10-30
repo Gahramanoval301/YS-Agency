@@ -2,6 +2,7 @@ import { useParams } from 'react-router';
 import SingleBlogDetailsWrapper from '../../components/BlogDetails/SingleBlogDetailsWrapper'
 import { useEffect, useState } from 'react';
 import { BLOGS_DATA } from '../../components/Blogs/BlogsContainer';
+import { getSingleBlog } from '../../api/blog';
 
 interface socialMedia {
     type: string;
@@ -25,11 +26,19 @@ const BlogDetails = () => {
     console.log(id);
 
 
+    const fetchSingleBlog = async () => {
+        const singleBlogData = await getSingleBlog(id || "");
+        setSingleBlogData(singleBlogData)
+        console.log(singleBlogData);
+
+    }
+
     useEffect(() => {
         if (id) {
-            const projectId = Number(id);
-            const singleData = BLOGS_DATA.find(project => project.id === projectId);
-            setSingleBlogData(singleData || null);
+            fetchSingleBlog();
+            // const projectId = Number(id);
+            // const singleData = BLOGS_DATA.find(project => project.id === projectId);
+            // setSingleBlogData(singleData || null);
         }
     }, [id]);
 
