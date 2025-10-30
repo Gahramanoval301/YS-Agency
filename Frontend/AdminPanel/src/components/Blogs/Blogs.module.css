@@ -1,0 +1,17 @@
+.blogContainer {
+  margin-block: 2rem;
+  border-top: 1px solid #ff5cfc;
+
+  .headerSection {
+    margin-block: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .formWrapper {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 2rem;
+  }
+}
