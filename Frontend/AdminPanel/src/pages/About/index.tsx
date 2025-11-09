@@ -8,6 +8,12 @@ import { Image, SquarePen } from "lucide-react";
 import { useEffect, useState } from "react";
 import RichTextField from "../../components/common/RichTextField";
 import { getAboutData, updateAboutData } from "../../api/about";
+import toast from "react-hot-toast";
+
+export interface IDimension {
+  width: string;
+  height: string;
+}
 
 const About = () => {
   const [data, setData] = useState(null);
@@ -25,72 +31,91 @@ const About = () => {
     aboutSchemaValidation,
     onSubmit
   );
-  const [dimensions, setDimensions] = useState(null);
+  const [dimensions, setDimensions] = useState<IDimension | null>(null);
 
   console.log("formik", formik.values);
 
-  function onSubmit(values: AboutFormValues) {
+  function onSubmit() {
     return;
-    // console.log("Full form submit:", values);
   }
+
   async function handlePartialSubmit(section: "statistics" | "text1" | "text2" | "image") {
     try {
       let validationPath;
       let valuesToValidate;
 
       switch (section) {
-        case "statistics":
+        case "statistics": {
           validationPath = "statistics";
           valuesToValidate = formik.values.statistics;
 
           const formData = new FormData();
 
-          // ✅ Correct way: stringify object
           formData.append("statistics", JSON.stringify(formik.values.statistics));
 
           const res = await updateAboutData(formData);
-          console.log(res);
 
-
+          if (res) {
+            toast.success("Updated successfully!")
+          } else {
+            toast.error("Some error has occured!")
+          }
 
           break;
-        case "text1":
+        }
+        case "text1": {
           validationPath = "texts[0]";
           valuesToValidate = formik.values.texts[0];
 
           const formDataFirstText = new FormData();
 
-          // ✅ Correct way: stringify object
           formDataFirstText.append("texts", JSON.stringify(formik.values.texts));
           const resDataFirst = await updateAboutData(formDataFirstText);
-          console.log(resDataFirst);
+          if (resDataFirst) {
+            toast.success("Updated successfully!")
+          } else {
+            toast.error("Some error has occured!")
+          }
+
 
           break;
-        case "text2":
+        }
+        case "text2": {
           validationPath = "texts[1]";
           valuesToValidate = formik.values.texts[1];
           const formDataSecondText = new FormData();
 
-          // ✅ Correct way: stringify object
           formDataSecondText.append("texts", JSON.stringify(formik.values.texts));
           const resDataSecond = await updateAboutData(formDataSecondText);
-          console.log(resDataSecond);
+          if (resDataSecond) {
+            toast.success("Updated successfully!")
+          } else {
+            toast.error("Some error has occured!")
+          }
+
 
           break;
-        case "image":
+        }
+        case "image": {
           validationPath = "image";
           valuesToValidate = formik.values.image;
+          if (formik.values.image) {  
 
-          const formDataImg = new FormData();
+            const formDataImg = new FormData();
 
-          // ✅ Correct way: stringify object
-          console.log("IMG: ",formik.values.image);
+            console.log("IMG: ", formik.values.image);
 
-          formDataImg.append("file", formik.values.image);
-          const resDataImg = await updateAboutData(formDataImg);
-          console.log(resDataImg);
+            formDataImg.append("file", formik.values.image);
+            const resDataImg = await updateAboutData(formDataImg);
+            if (resDataImg) {
+              toast.success("Updated successfully!")
+            } else {
+              toast.error("Some error has occured!")
+            }
 
+          }
           break;
+        }
         default:
           return;
       }
@@ -125,8 +150,8 @@ const About = () => {
     const resData = await getAboutData();
     console.log(resData);
     formik.setValues({
-      ...resData.data,          // other fields
-      image: resData.imageUrl,  // set the file field separately
+      ...resData.data,         
+      image: resData.imageUrl,  
     });
 
     setData(resData.data)
@@ -221,7 +246,6 @@ const About = () => {
               <button type="button" className="main-btn" onClick={() => handlePartialSubmit("text1")}>Save</button>
             </div>
           }
-          {/* <TextField formik={formik} name="texts[0].content" placeholder="Add Text" className="common-text-field" isEdit={editStatistics.isTextFirstEdit} multiline rows={10} /> */}
         </div>
 
 
@@ -257,7 +281,6 @@ const About = () => {
               <button type="button" onClick={() => handlePartialSubmit("text2")} className="main-btn">Save</button>
             </div>
           }
-          {/* <TextField formik={formik} name="texts[0].content" placeholder="Add Text" className="common-text-field" isEdit={editStatistics.isTextFirstEdit} multiline rows={10} /> */}
         </div>
 
         <div className="formSection" style={{ marginBlock: "2rem" }}>

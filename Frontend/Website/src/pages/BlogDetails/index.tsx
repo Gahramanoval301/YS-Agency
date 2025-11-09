@@ -1,7 +1,6 @@
 import { useParams } from 'react-router';
 import SingleBlogDetailsWrapper from '../../components/BlogDetails/SingleBlogDetailsWrapper'
 import { useEffect, useState } from 'react';
-import { BLOGS_DATA } from '../../components/Blogs/BlogsContainer';
 import { getSingleBlog } from '../../api/blog';
 
 interface socialMedia {
@@ -9,18 +8,15 @@ interface socialMedia {
     link: string;
 }
 
-export interface Blog {
-    id: number;
-    title: string;
-    content: string;
-    date: string;
-    tags: string[];
-    imgUrl: string;
-    categories: string[];
+import type { BlogProps } from '../../api/blog';
+import { useTranslation } from 'react-i18next';
+
+export interface Blog extends BlogProps {
     socialMedias: socialMedia[]
 }
 
 const BlogDetails = () => {
+    const { t } = useTranslation();
     const { id } = useParams();
     const [singleBlogData, setSingleBlogData] = useState<Blog | null>(null);
     console.log(id);
@@ -44,7 +40,7 @@ const BlogDetails = () => {
 
 
     console.log(singleBlogData);
-    if (!singleBlogData) return <div>Loading...</div>;
+    if (!singleBlogData) return <div>{t("loading")}...</div>;
 
 
     return (

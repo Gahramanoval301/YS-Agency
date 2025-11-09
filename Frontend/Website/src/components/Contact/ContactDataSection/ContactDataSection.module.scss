@@ -5,12 +5,12 @@
 
     .socialDataContainer {
         h3 {
-            font-size: 38px;
+            font-size: 28px;
             color: #fff;
         }
 
         p {
-            font-size: 20px;
+            font-size: 18px;
             color: #ffffffb2;
             margin-top: 8px;
         }
@@ -57,6 +57,7 @@
 
             box-shadow: 0 0 0 rgba(255, 255, 255, 0);
             border: 1px solid transparent;
+            max-height: 200px !important;
 
             div {
                 display: flex;

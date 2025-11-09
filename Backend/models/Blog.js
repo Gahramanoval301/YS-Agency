@@ -36,11 +36,14 @@ module.exports = (sequelize, DataTypes) => {
     Blog.belongsToMany(models.Category, {
       through: "BlogCategories",
       foreignKey: "blogId",
+      otherKey: "categoryId",
+      // as: "categories", // unique alias for blog side
     });
 
     Blog.belongsToMany(models.Tag, {
       through: "BlogTags",
       foreignKey: "blogId",
+      // as: "tags",
     });
   };
 
@@ -54,4 +57,4 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   return Blog;
-};   
+};

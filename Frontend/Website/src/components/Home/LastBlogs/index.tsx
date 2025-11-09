@@ -1,59 +1,52 @@
 import styles from "./LastBlogs.module.scss"
-import Gallery1 from "../../../assets/images/Gallery/gallery1.png";
-import Gallery2 from "../../../assets/images/Gallery/gallery2.png";
-import Gallery3 from "../../../assets/images/Gallery/gallery3.png";
 import { Link } from 'react-router';
+import { useEffect, useState } from "react";
+import { getLastBlogs, type BlogProps } from "../../../api/blog";
+import { formatDate } from "../../../utils/formatDate";
+import { useTranslation } from "react-i18next";
 
-
-const LAST_BLOGS_DATA = [
-    {
-        id: 0,
-        imgUrl: Gallery1,
-        date: "31.03.2025",
-        title: "2025-ci ildə populyar olacaq yeni video məzmun formatları",
-        blogUrl: "",
-    },
-    {
-        id: 1,
-        imgUrl: Gallery2,
-        date: "31.03.2025",
-        title: "2025-ci ildə populyar olacaq yeni video məzmun formatları",
-        blogUrl: "",
-    },
-    {
-        id: 2,
-        imgUrl: Gallery3,
-        date: "31.03.2025",
-        title: "2025-ci ildə populyar olacaq yeni video məzmun formatları",
-        blogUrl: "",
-    },
-]
 const LastBlogs = () => {
+    const [lastBlogs, setLastBlogs] = useState<BlogProps[] | null>(null);
+    const { t } = useTranslation();
+
+    const fetchLastBlogs = async () => {
+        const res = await getLastBlogs();
+        if (res) {
+            setLastBlogs(res);
+        }
+    }
+
+    useEffect(() => {
+        fetchLastBlogs();
+    }, [])
+
     return (
         <div className={styles.blogsSection}>
 
             <div className={styles.blogsHeadline}>
-                <h2>Blog</h2>
-                <Link to={"/"}>
-                    See all
+                <h2>{t("blog")}</h2>
+                <Link to={"/blogs"}>
+                    {t("seall")}
                 </Link>
             </div>
             <div className={styles.lastBlogsContainer}>
                 <div className={styles.topBlogDesign}></div>
                 {
-                    LAST_BLOGS_DATA.map(({ id, imgUrl, date, title }) => (
+                    lastBlogs && lastBlogs.map(({ id, blogImgUrl, blogTitle, createdAt, slug }) => (
                         <div className={styles.blogWrapper} key={id}>
                             <div className={styles.imageWrapper}>
-                                <img src={imgUrl} alt={title} />
+                                <img src={blogImgUrl} alt={blogTitle} />
                             </div>
                             <div className={styles.dateWrapper}>
-                                {date}
+                                {formatDate(createdAt)}
                             </div>
-                            <h3>{title}</h3>
-                            <div className={styles.readMoreWrapper}>
-                                <p>Read More</p>
-                                <span>➡</span>
-                            </div>
+                            <h3>{blogTitle}</h3>
+                            <Link to={`/blogs/${slug}`}>
+                                <div className={styles.readMoreWrapper}>
+                                    <p>{t("readmore")}</p>
+                                    <span>➡</span>
+                                </div>
+                            </Link>
                         </div>
                     ))
                 }

@@ -1,52 +1,54 @@
+import { BookUser, Clapperboard, Handshake, Headset, House, KeyRound, Layers, LayoutDashboard, LayoutTemplate, Settings } from "lucide-react";
+
 export const SIDEBAR_NAV_LINKS = [
   {
     label: "Dashboard",
     link: "/",
-    Icon: ""
+    Icon: <LayoutDashboard />
   },
   {
     label: "Ana səhifə",
     link: "/home",
-    Icon: ""
+    Icon: <House />
   },
   {
     label: "Haqqımızda",
     link: "/about",
-    Icon: ""
+    Icon: <Headset />
   },
   {
     label: "Xidmətlərimiz",
-    link: "",
-    Icon: ""
+    link: "/services",
+    Icon: <Settings />
   },
   {
     label: "Layihələrimiz",
-    link: "",
-    Icon: ""
+    link: "/projects",
+    Icon: <Layers />
   },
   {
     label: "Studiya",
-    link: "",
-    Icon: ""
+    link: "/studio",
+    Icon: <Clapperboard />
   },
   {
     label: "Partnyorlar",
-    link: "",
-    Icon: ""
+    link: "/partners",
+    Icon: <Handshake />
   },
   {
     label: "Blog",
     link: "/blogs",
-    Icon: ""
+    Icon: <LayoutTemplate />
   },
   {
     label: "Əlaqə",
-    link: "",
-    Icon: ""
+    link: "/contact",
+    Icon: <BookUser />
   },
   {
     label: "Auth",
     link: "/auth",
-    Icon: ""
+    Icon: <KeyRound/>
   },
 ]

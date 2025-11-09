@@ -30,7 +30,7 @@ export const aboutInitialValues = {
   ],
   image: null,
 }
-const hasVisibleContent = (html) => {
+const hasVisibleContent = (html:string) => {
   if (!html) return false;
   const stripped = html.replace(/<[^>]*>/g, "").trim();
   return stripped.length > 0;

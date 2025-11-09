@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useBlogSchemaValidation, type BlogFormValues } from '../../data/blogFormData';
 import { createBlogData } from '../../api/blog';
 import useFormikForm from '../../hooks/useFormikForm';
@@ -9,41 +9,57 @@ import MultipleSelectField from '../common/MultipleSelectField';
 import HashtagField from '../common/TagSelectField';
 import ImageField from '../common/ImageField';
 import { Image } from 'lucide-react';
+import toast from 'react-hot-toast';
+import type { IOption } from './BlogsSection';
 
-const CreateNewBlogSection = ({ reloadBlogs, options, setIsNewCreate }) => {
-    const [dimensions, setDimensions] = useState(null);
+interface NewBlogSectionProps {
+    reloadBlogs: any;
+    setIsNewCreate: React.Dispatch<React.SetStateAction<boolean>>;
+    options: IOption[];
+
+}
+
+const CreateNewBlogSection = ({ reloadBlogs, options, setIsNewCreate }: NewBlogSectionProps) => {
+    // const [dimensions, setDimensions] = useState(null);
     const [data, setData] = useState(null);
 
     const blogSchemaValidation = useBlogSchemaValidation();
 
     const onSubmit = async (values: BlogFormValues) => {
-        console.log("Creating blog:", values);
+        try {
+            const formData = new FormData();
 
-        const formData = new FormData();
+            for (const key in values) {
+                if (key === "image") continue; 
+                const typedKey = key as keyof BlogFormValues;
+                const value = values[typedKey];
 
-        for (const key in values) {
-            if (key === "image") continue; // skip, handled below
-            const value = values[key];
-
-            if (Array.isArray(value)) {
-                // Convert arrays to JSON strings
-                formData.append(key, JSON.stringify(value));
-            } else if (value !== undefined && value !== null) {
-                formData.append(key, value);
+                if (Array.isArray(value)) {
+                    formData.append(key, JSON.stringify(value));
+                } else if (value !== undefined && value !== null) {
+                    formData.append(key, value);
+                }
             }
-        }
 
-        // Append file if available
-        if (values.image instanceof File) {
-            formData.append("file", values.image);
-        }
+            // Append file if available
+            if (values.image instanceof File) {
+                formData.append("file", values.image);
+            }
 
-        await createBlogData(formData);
-        formik.resetForm();
-        setIsNewCreate(false);
-        reloadBlogs();
+            const res = await createBlogData(formData);
+            if (res) {
+                toast.error("Created successfully!")
+            } else {
+                toast.error("Some error has occured!")
+            }
+            formik.resetForm();
+            setIsNewCreate(false);
+            reloadBlogs();
+        }
+        catch {
+            toast.error("Some error has occured!")
+        }
     };
-
 
 
     const formik = useFormikForm<BlogFormValues>(
@@ -57,9 +73,6 @@ const CreateNewBlogSection = ({ reloadBlogs, options, setIsNewCreate }) => {
         blogSchemaValidation,
         onSubmit
     );
-    console.log("CREATE: ", formik.values);
-
-
 
     return (
         <form onSubmit={formik.handleSubmit} className={styles.blogContainer}>
@@ -95,7 +108,6 @@ const CreateNewBlogSection = ({ reloadBlogs, options, setIsNewCreate }) => {
                         placeholder="Categories"
                     />
 
-
                     <HashtagField formik={formik} name="blogTags" placeholder="Add hashtags..." />
 
                 </div>
@@ -105,7 +117,7 @@ const CreateNewBlogSection = ({ reloadBlogs, options, setIsNewCreate }) => {
                         setData={setData}
                         formik={formik}
                         name="image"
-                        setDimensions={setDimensions}
+                        // setDimensions={setDimensions}
                         label={
                             <label htmlFor="image" className="common-file-field full-width">
                                 <Image color="#ffffff66" width={32} height={32} />

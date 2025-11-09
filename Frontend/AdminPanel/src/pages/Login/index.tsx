@@ -1,10 +1,10 @@
-import React from 'react'
 import { loginInitialValues, useLoginSchemaValidation, type LoginFormValues } from '../../data/authFormData';
 import useFormikForm from '../../hooks/useFormikForm';
 import styles from "./index.module.css"
 import TextField from '../../components/common/TextField';
 import { loginUser } from '../../api/auth';
 import { useNavigate } from 'react-router';
+import toast from 'react-hot-toast';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -23,6 +23,8 @@ const Login = () => {
         if (resData.success) {
             localStorage.setItem("userEmail", JSON.stringify(resData.data.userEmail))
             navigate("/")
+        } else {
+            toast.error("Credentials are wrong!")
         }
     }
     return (

@@ -1,23 +1,31 @@
-import React from "react";
 import styles from "./BlogShare.module.scss";
+import LinkedinIcon from "../../../assets/images/Gallery/linkedinIcon.png";
+import InstagramIcon from "../../../assets/images/Gallery/instagramIcon.png";
+import YoutubeIcon from "../../../assets/images/Gallery/youtubeIcon.png";
+import TiktokIcon from "../../../assets/images/Gallery/tiktokIcon.png";
 
 interface BlogShareProps {
     blogUrl: string; // URL of the current blog page
-    blogTitle: string;
+    blogTitle?: string;
 }
 
-const BlogShare = ({ blogUrl, blogTitle }: BlogShareProps) => {
+const BlogShare = ({ blogUrl }: BlogShareProps) => {
 
-    // Encode URL and title for sharing
     const encodedUrl = encodeURIComponent(blogUrl);
-    const encodedTitle = encodeURIComponent(blogTitle);
+    // const encodedTitle = encodeURIComponent(blogTitle);
 
-    // Platform share URLs
+    const socialMediaIcons: Record<string, string> = {
+        Tk: TiktokIcon,
+        Ins: InstagramIcon,
+        Ln: LinkedinIcon,
+        Yt: YoutubeIcon,
+    };
+
     const shareLinks = {
         linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
-        instagram: `https://www.instagram.com/`, // Instagram doesn’t support web sharing
-        tiktok: `https://www.tiktok.com/upload?url=${encodedUrl}`, // TikTok web share is limited
-        youtube: `https://www.youtube.com/`, // YouTube doesn’t allow direct URL sharing
+        instagram: `https://www.instagram.com/`,
+        tiktok: `https://www.tiktok.com/upload?url=${encodedUrl}`,
+        youtube: `https://www.youtube.com/`,
     };
 
     const handleClick = (platform: keyof typeof shareLinks) => {
@@ -31,32 +39,43 @@ const BlogShare = ({ blogUrl, blogTitle }: BlogShareProps) => {
 
     return (
         <div className={styles.socialMediasWrapper}>
-            <div >
                 <button onClick={() => handleClick("linkedin")} title="Share on LinkedIn">
                     <div className={styles.iconWrapper}>
-                        <i>Ln</i>
+                        <img
+                            src={socialMediaIcons.Ln}
+                            alt="Share on LinkedIn"
+                            style={{ width: "40px", height: "40px", objectFit: "contain" }}
+                        />
                     </div>
                 </button>
                 <button onClick={() => handleClick("instagram")} title="Share on Instagram">
-                    Ins
                     <div className={styles.iconWrapper}>
-                        <i>Ins</i>
+                        <img
+                            src={socialMediaIcons.Ins}
+                            alt="Share on Instagram"
+                            style={{ width: "40px", height: "40px", objectFit: "contain" }}
+                        />
                     </div>
                 </button>
                 <button onClick={() => handleClick("tiktok")} title="Share on TikTok">
-
                     <div className={styles.iconWrapper}>
-                        <i>Tk</i>
+                        <img
+                            src={socialMediaIcons.Tk}
+                            alt="Share on TikTok"
+                            style={{ width: "40px", height: "40px", objectFit: "contain" }}
+                        />
                     </div>
                 </button>
                 <button onClick={() => handleClick("youtube")} title="Share on YouTube">
-
                     <div className={styles.iconWrapper}>
-                        <i>Yt</i>
+                        <img
+                            src={socialMediaIcons.Yt}
+                            alt="Share on YouTube"
+                            style={{ width: "40px", height: "40px", objectFit: "contain" }}
+                        />
                     </div>
                 </button>
             </div>
-        </div>
     );
 };
 

@@ -1,4 +1,3 @@
-import axiosInstance from "../axiosInstance";
 
 export async function getAboutData() {
   const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/about/get`);
@@ -8,7 +7,7 @@ export async function getAboutData() {
   return data;
 }
 
-export async function updateAboutData(formData) {
+export async function updateAboutData(formData:FormData) {
   const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/about/update-data`, {
     method: "PATCH",
     body: formData, // no stringify

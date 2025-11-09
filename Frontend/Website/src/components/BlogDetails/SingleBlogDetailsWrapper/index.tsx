@@ -6,7 +6,7 @@ import BlogSingleContentWrapper from '../BlogSingleContentWrapper'
 import Footer from '../../../layouts/Footer'
 import SimilarBlogs from '../SimilarBlogs'
 import type { BlogProps } from "../../../api/blog"
-const SingleBlogDetailsWrapper = ({ data }:{data:BlogProps}) => {
+const SingleBlogDetailsWrapper = ({ data }: { data: BlogProps }) => {
 
     return (
         <div className={styles.singleBlogDetailsWrapperContainer}>
@@ -29,7 +29,6 @@ const SingleBlogDetailsWrapper = ({ data }:{data:BlogProps}) => {
                     className={styles.particlesCanvas}
                 />
 
-
             </div>
 
             <div className={styles.bodyContent}>
@@ -49,7 +48,7 @@ const SingleBlogDetailsWrapper = ({ data }:{data:BlogProps}) => {
                     <div className={styles.blogDesign}>BLOG</div>
 
                     <BlogSingleContentWrapper data={data} />
-                <SimilarBlogs/>
+                    <SimilarBlogs />
                 </div>
                 <Footer />
             </div>

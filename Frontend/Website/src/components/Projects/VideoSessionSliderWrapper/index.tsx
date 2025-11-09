@@ -15,8 +15,10 @@ import './index.css';
 
 // import required modules
 import { Navigation } from 'swiper/modules';
+import type { VideoGallerySection } from "../../../api/project";
+import YouTubeEmbed from "../../shared/YoutubeEmbed";
 
-const VideoSessionSliderWrapper = () => {
+const VideoSessionSliderWrapper = ({ data }: { data: VideoGallerySection[] }) => {
     const prevRef = useRef<HTMLButtonElement>(null);
     const nextRef = useRef<HTMLButtonElement>(null);
     // const [activeIndex, setActiveIndex] = useState(0);
@@ -71,32 +73,12 @@ const VideoSessionSliderWrapper = () => {
                     className="mySwiper"
                 >
 
-                    {[...Array(5)].map((num) => (
+                    {data.map((videoGal) => (
 
-                        <SwiperSlide key={num}>
+                        <SwiperSlide key={videoGal.id}>
                             <div className="imageWrapper">
                                 {/* just delete controls when  */}
-                                <video
-                                    controls
-                                    muted
-                                    loop
-                                    playsInline
-                                    poster="https://upload.wikimedia.org/wikipedia/commons/e/e8/Elephants_Dream_s5_both.jpg"
-                                    style={{ width: '100%', height: "100%", borderRadius: '8px', objectFit: 'cover' }}
-                                >
-                                    <source
-                                        src="https://archive.org/download/ElephantsDream/ed_1024_512kb.mp4"
-                                        type="video/mp4"
-                                    />
-                                    Sorry, your browser doesn't support embedded videos, but you can
-                                    <a
-                                        href="https://archive.org/download/ElephantsDream/ed_1024_512kb.mp4"
-                                        download="ed_1024_512kb.mp4"
-                                    >
-                                        download the MP4
-                                    </a>
-                                    and watch it.
-                                </video>
+                                <YouTubeEmbed thumbnailUrl={videoGal.imgUrl} youtubeLink={videoGal.youtubeLink} />
 
 
                             </div>

@@ -1,41 +1,125 @@
-import { Image, RefreshCw, Trash } from "lucide-react";
-import React, { type ReactNode } from "react";
-import { getImageDimensions } from "../../helpers/imageConfig"
+import { RefreshCw, Trash } from "lucide-react";
+import React, {  useState, type ReactNode } from "react";
+import { getIn } from "formik";
+import { uploadFile } from "../../api/file-upload";
+import { getImageDimensions } from "../../helpers/imageConfig";
 
 interface ImageFieldProps {
     formik: any;
     name: string;
-    label?: ReactNode;
+    label: ReactNode;
+    data?: any;
+    setData?: any;
     setDimensions?: any;
+    imageWrapperSpecificClassName?: string;
+    onFileSelect?: (file: File) => void; 
+    onFileDelete?: any,
+    onFileUpdate?: any;
+    isProject?: boolean;
+    fileIdName?: string;
 }
 
-const ImageField: React.FC<ImageFieldProps> = ({ formik, name, label, setDimensions, data, setData }) => {
+const ImageField: React.FC<ImageFieldProps> = ({
+    formik,
+    name,
+    label,
+    setDimensions,
+    data,
+    setData,
+    isProject,
+    onFileSelect, // 👈 destructure here
+    imageWrapperSpecificClassName,
+    onFileDelete,
+    onFileUpdate,
+    fileIdName
+}) => {
+    const [isUpdate, setIsUpdate] = useState(false)
+
+
     const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log("hi");
+
         const file = e.currentTarget.files?.[0];
+        if (!file) return;
 
-        const { width, height } = await getImageDimensions(file);
-        setDimensions({ width, height });
+        if (isProject) {
+            console.log(file);
 
-        formik.setFieldValue(name, file || null);
+            const resDataFile = await uploadFile(file);
+            formik.setFieldValue(name, resDataFile.url || null);
+            formik.setFieldValue(fileIdName, resDataFile.fileId || null);
+            console.log(formik.values);
+
+
+
+        } else {
+            if (onFileUpdate && isUpdate) {
+                onFileUpdate(file);
+
+                formik.setFieldValue(name, file || null);
+
+                if (setData) {
+                    setData((prev: any) => ({
+                        ...prev,
+                        imageUrl: URL.createObjectURL(file),
+                    }));
+                }
+            }
+            else {
+
+                if (setDimensions) {
+                    const { width, height } = await getImageDimensions(file);
+                    setDimensions({ width, height });
+                }
+
+
+                formik.setFieldValue(name, file || null);
+                console.log(formik.values[name]);
+
+                if (setData) {
+                    setData((prev: any) => ({
+                        ...prev,
+                        imageUrl: URL.createObjectURL(file),
+                    }));
+                }
+
+
+                if (onFileSelect) {
+                    onFileSelect(file);
+                }
+            }
+        }
+
+
     };
 
     const handleDeleteImage = async () => {
-        formik.setFieldValue(name, null);
-        setData((prev) => ({
-            ...prev,       // spread the previous state
-            imageUrl: null // overwrite imageUrl
-        }));
+        if (onFileDelete) {
+            onFileDelete();
+        } else {
+
+            formik.setFieldValue(name, null);
+            if (setData) {
+                setData((prev: any) => ({
+                    ...prev,
+                    imageUrl: null,
+                }));
+            }
+        }
+
 
     };
-    console.log(formik.values.imageUrl);
 
-    const file = formik.values[name];
+    const file = getIn(formik.values, name);
+
+    // const file = formik.values[name];
     let preview;
+    console.log(formik.values);
+
 
     if (file instanceof File) {
         preview = URL.createObjectURL(file);
     } else if (typeof file === "string") {
-        // If it's already a string (like CDN link), use it directly
         preview = file;
     } else if (data?.imageUrl) {
         preview = data.imageUrl;
@@ -43,44 +127,41 @@ const ImageField: React.FC<ImageFieldProps> = ({ formik, name, label, setDimensi
 
     return (
         <div style={{ marginBottom: "1rem" }}>
-
-            {(!preview && !data?.imageUrl) &&
+            {(!preview && !data?.imageUrl) && (
                 <>
                     {label}
-
-                    < input
+                    <input
                         id={name}
                         name={name}
                         type="file"
                         accept="image/*"
                         onChange={handleChange}
                         style={{ display: "none" }}
+
                     />
                 </>
-            }
+            )}
 
             {(preview || data?.imageUrl) && (
-                <div className="image-wrapper">
-
+                <div className={`image-wrapper ${imageWrapperSpecificClassName}`}>
                     <div className="common-image-section">
-                        <img
-                            src={preview || data?.imageUrl}
-                            alt="Preview"
-                        />
+                        <img src={preview || data?.imageUrl} alt="Preview" />
                     </div>
 
                     <div className="controls-section">
-                        <div className="trash-gradient" style={{ cursor: "pointer" }} onClick={() => handleDeleteImage()}>
+                        <div
+                            className="trash-gradient"
+                            style={{ cursor: "pointer" }}
+                            onClick={handleDeleteImage}
+                        >
                             <Trash width={32} height={32} />
                         </div>
-                        <div >
-                            <label
-                                style={{ cursor: "pointer" }}
-                                htmlFor={"image"}
-                            >
+
+                        <div>
+                            <label style={{ cursor: "pointer" }} htmlFor={name} onClick={() => setIsUpdate(true)}>
                                 <RefreshCw color="#000" width={32} height={32} />
                             </label>
-                            < input
+                            <input
                                 id={name}
                                 name={name}
                                 type="file"
@@ -91,9 +172,8 @@ const ImageField: React.FC<ImageFieldProps> = ({ formik, name, label, setDimensi
                         </div>
                     </div>
                 </div>
-            )
-            }
-        </div >
+            )}
+        </div>
     );
 };
 

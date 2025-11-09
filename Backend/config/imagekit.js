@@ -44,20 +44,20 @@ const deleteImage = (fileId) => {
   });
 };
 
-// async function uploadImage(file) {
-//   if (!file) return null;
+const deleteImages = async (fileIds = []) => {
+  if (!fileIds.length) return [];
+  const results = [];
 
-//   const uploadResponse = await imagekit.upload({
-//     file: file.buffer.toString("base64"), // if file is in memory
-//     fileName: file.originalname,
-//     folder: "/app", // your folder
-//   });
+  for (const id of fileIds) {
+    try {
+      const res = await deleteImage(id);
+      results.push({ fileId: id, status: "deleted", result: res });
+    } catch (err) {
+      results.push({ fileId: id, status: "error", error: err.message });
+    }
+  }
 
-//   // Return both URL and fileId
-//   return {
-//     url: uploadResponse.url,
-//     fileId: uploadResponse.fileId,
-//   };
-// }
+  return results;
+};
 
-module.exports = { uploadImage, deleteImage };
+module.exports = { uploadImage, deleteImage, deleteImages };

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import CommonLayout from '../../components/layout/CommonLayout'
 import { changePasswordInitialValues, useChangePasswordValidation, type ChangePasswordFormValues } from '../../data/authFormData';
 import useFormikForm from '../../hooks/useFormikForm';
 import TextField from '../../components/common/TextField';
 import { changePassword } from '../../api/auth';
+import toast from 'react-hot-toast';
 
 const Auth = () => {
   const [currentEmail, setCurrentEmail] = useState(null);
@@ -16,16 +17,23 @@ const Auth = () => {
   );
 
   async function onSubmit(values: ChangePasswordFormValues) {
-    console.log(values);
-    const { confirmNewPassword, ...payload } = values;
+    try {
 
-    if (currentEmail) {
+      const { confirmNewPassword, ...payload } = values;
+      console.log(confirmNewPassword);
 
-      const resData = await changePassword({ userEmail: currentEmail, ...payload });
 
-      console.log(resData);
+      if (currentEmail) {
+
+        const resData = await changePassword({ userEmail: currentEmail, ...payload });
+        if (resData) {
+          toast.success("Password was updated!")
+        }
+      }
+
+    } catch {
+      toast.error("Some error has occured!");
     }
-
 
   }
 

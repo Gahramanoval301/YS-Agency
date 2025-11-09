@@ -1,4 +1,20 @@
-import type { BlogFormValues } from "../../data/blogFormData";
+export interface Tag {
+    id: string;
+    title: string;
+}
+
+export interface BlogProps {
+    id: string;
+    blogTitle: string;
+    slug: string;
+    blogContent: string;
+    blogImgUrl: string;
+    blogImgUrlFileId: string;
+    createdAt: string; // or Date if you parse it
+    updatedAt: string; // or Date if you parse it
+    Categories: any[]; // since your example has an empty array, you can replace `any` with a proper type if available
+    Tags: Tag[];
+}
 
 // get blogs
 export async function getAllBlogs(
@@ -16,7 +32,6 @@ export async function getAllBlogs(
     }&title=${searchTitle || ""}`
   );
 
-  // Make sure you parse JSON
   const data = await response.json();
   return data;
 }
@@ -25,7 +40,6 @@ export async function getSingleBlog(blogSlugOrId: string) {
     `${import.meta.env.VITE_BACKEND_URL}/api/blog/${blogSlugOrId}`
   );
 
-  // Make sure you parse JSON
   const data = await response.json();
   return data;
 }
@@ -34,12 +48,11 @@ export async function getLastBlogs() {
     `${import.meta.env.VITE_BACKEND_URL}/api/blog/last-blogs`
   );
 
-  // Make sure you parse JSON
   const data = await response.json();
   return data;
 }
 
-export async function createBlogData(payload: BlogFormValues) {
+export async function createBlogData(payload: FormData) {
   const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/blog`, {
     method: "POST",
     credentials: "include",
@@ -50,13 +63,13 @@ export async function createBlogData(payload: BlogFormValues) {
   return data;
 }
 
-export async function updateBlogData(blogId: string, payload: BlogFormValues) {
+export async function updateBlogData(blogId: string, payload: FormData) {
   const response = await fetch(
     `${import.meta.env.VITE_BACKEND_URL}/api/blog/${blogId}`,
     {
-      method: "PUT", // ✅ use PUT or PATCH
+      method: "PUT",
       credentials: "include",
-      body: payload, // ✅ send FormData directly
+      body: payload,
     }
   );
 

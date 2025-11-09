@@ -13,6 +13,7 @@ import About from "../pages/About";
 import Auth from "../pages/Auth";
 import Login from "../pages/Login";
 import ProtectedRoute from "./ProtectedRoute";
+import ProjectDetails from "../pages/ProjectDetails";
 
 const withSuspense = (element: JSX.Element) => (
   <Suspense fallback={<div>Loading...</div>}>{element}</Suspense>
@@ -43,6 +44,14 @@ export const router = createBrowserRouter([
     path: "/projects",
     element: <ProtectedRoute element={withSuspense(<Projects />)} />,
   },
+  {
+    path: "/projects/:slug",
+    element: <ProtectedRoute element={withSuspense(<ProjectDetails />)} />,
+  },
+  // {
+  //   path: "/projects/create-new-project",
+  //   element: <ProtectedRoute element={withSuspense(<ProjectDetails />)} />,
+  // },
   {
     path: "/blogs",
     element: <ProtectedRoute element={withSuspense(<Blogs />)} />,

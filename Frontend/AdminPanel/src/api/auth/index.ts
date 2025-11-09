@@ -1,4 +1,3 @@
-import axiosInstance from "../axiosInstance";
 //login, check-auth, change-pass,
 
 interface LoginProps {

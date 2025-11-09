@@ -1,0 +1,227 @@
+.sliderMixThumbnailProject {
+  .swiper {
+    width: 100%;
+    /* width: 80% !important; */
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #444;
+
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 600px !important;
+    object-fit: cover;
+  }
+  .swiper-slide .swiper-description {
+    h3 {
+      margin-bottom: 1rem;
+    }
+    position: absolute;
+    text-align: left;
+    top: 5%;
+    left: 5%;
+    width: 60%;
+
+    /* overlay look */
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    line-height: 28px;
+
+    padding: 16px 20px;
+    border-radius: 8px;
+    color: #000;
+    transition: background 0.3s ease;
+  }
+
+  .swiper-slide .swiper-description:hover {
+    background: rgba(255, 255, 255, 0.4); /* a bit stronger on hover */
+  }
+
+  .swiper {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .swiper-slide {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .mySwiper2 {
+    width: 100%;
+    /* height: 200px !important; */
+    padding: 0;
+  }
+
+  .mySwiper {
+    box-sizing: border-box;
+    margin: 0 !important;
+
+    .swiper-wrapper {
+      margin: 0 !important;
+      height: 100%;
+    }
+  }
+
+  .mySwiper .swiper-slide {
+    width: 25%;
+    /* height: 100px !important; */
+    opacity: 0.4;
+
+    img {
+      object-fit: cover;
+      height: 150px !important;
+      object-position: center;
+    }
+  }
+
+  .mySwiper .swiper-slide-thumb-active {
+    opacity: 1;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .sliderMixThumbnailProject {
+    .swiper-slide {
+      font-size: 16px;
+    }
+
+    .swiper-slide img {
+      height: 500px !important;
+    }
+    .swiper-slide .swiper-description {
+      /* top: 5%;
+      left: 5%; */
+      left: 60px;
+      width: 70%;
+      line-height: 26px;
+      /* padding: 16px 20px; */
+    }
+
+    .mySwiper .swiper-slide {
+      img {
+        height: 130px !important;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .sliderMixThumbnailProject {
+    .swiper-slide {
+      font-size: 16px;
+    }
+
+    .swiper-slide img {
+      height: 400px !important;
+    }
+    .swiper-slide .swiper-description {
+      /* top: 5%;
+      left: 5%; */
+      width: 80%;
+      line-height: 18px;
+      /* padding: 16px 20px; */
+    }
+
+    /* .mySwiper .swiper-slide {
+
+      img {
+        height: 130px !important;
+      }
+    } */
+  }
+}
+@media screen and (max-width: 756px) {
+  .sliderMixThumbnailProject {
+    .swiper-slide {
+      font-size: 16px;
+    }
+
+    .swiper-slide img {
+      height: 320px !important;
+    }
+    .swiper-slide .swiper-description {
+      /* top: 5%;
+      left: 5%; */
+      /* left: 10%; */
+      width: 80%;
+      /* padding: 16px 20px; */
+    }
+
+    .mySwiper .swiper-slide {
+      img {
+        height: 140px !important;
+      }
+    }
+  }
+}
+@media screen and (max-width: 576px) {
+  .sliderMixThumbnailProject {
+    .swiper-slide {
+      font-size: 14px;
+    }
+
+    .swiper-slide img {
+      height: 280px !important;
+    }
+    .swiper-slide .swiper-description {
+      h3 {
+        margin-bottom: 0.5rem;
+      }
+
+      /* top: 5%;
+      left: 5%; */
+      /* left: 10%; */
+      width: 75%;
+      padding: 8px 10px;
+    }
+
+    .mySwiper .swiper-slide {
+      img {
+        height: 120px !important;
+      }
+    }
+  }
+}
+@media screen and (max-width: 420px) {
+  .sliderMixThumbnailProject {
+    .swiper-slide {
+      font-size: 14px;
+    }
+
+    .swiper-slide img {
+      height: 240px !important;
+    }
+    .swiper-slide .swiper-description {
+      /* top: 5%;
+      left: 5%; */
+      /* left: 10%; */
+      width: 70%;
+      padding: 8px 10px;
+    }
+
+    .mySwiper .swiper-slide {
+      img {
+        height: 110px !important;
+      }
+    }
+  }
+}

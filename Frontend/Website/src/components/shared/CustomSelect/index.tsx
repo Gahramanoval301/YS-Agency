@@ -2,10 +2,10 @@ import { useState, useRef, useEffect } from "react";
 import "./CustomSelect.scss";
 import type { CategoryProps } from "../../../api/blog";
 
-interface OptionProp {
-  label: string;
-  value: string;
-}
+// interface OptionProp {
+//   label: string;
+//   value: string;
+// }
 
 interface CustomSelectProps {
   options: CategoryProps[];

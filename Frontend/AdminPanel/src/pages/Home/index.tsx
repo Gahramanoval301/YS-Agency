@@ -4,7 +4,7 @@ const Home = () => {
     return (
         <div>
             <CommonLayout sectionTitle="Home">
-                sa
+                Home
             </CommonLayout>
         </div>
     )

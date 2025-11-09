@@ -12,31 +12,36 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import './index.css';
+import { useTranslation } from 'react-i18next';
 
 
-const SERVICES_DATA_FOR_HOME = [
-    {
-        imgUrl: Gallery1,
-        type: "branding"
-    },
-    {
-        imgUrl: Gallery2,
-        type: "Graphic Design"
-    },
-    {
-        imgUrl: Gallery3,
-        type: "Makreting Strategy"
-    },
-    {
-        imgUrl: Gallery4,
-        type: "Social Media Marketing"
-    },
-    {
-        imgUrl: Gallery5,
-        type: "Copywriting"
-    },
-]
 export default function ServicesSwiper() {
+    const { t } = useTranslation();
+
+
+    const SERVICES_DATA_FOR_HOME = [
+        {
+            imgUrl: Gallery1,
+            type: t("branding")
+        },
+        {
+            imgUrl: Gallery2,
+            type: t("graphicdesign")
+        },
+        {
+            imgUrl: Gallery3,
+            type: t("makretingstrategy")
+        },
+        {
+            imgUrl: Gallery4,
+            type: t("socialmediamarketing")
+        },
+        {
+            imgUrl: Gallery5,
+            type: t("copywriting")
+        },
+    ];
+
     return (
         <div className='ServicesSwiperContainer'>
             <Swiper

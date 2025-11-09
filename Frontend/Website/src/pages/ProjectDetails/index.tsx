@@ -1,36 +1,31 @@
 import { useParams } from "react-router";
 // import styles from "./ProjectDetails.module.scss"
 import { useEffect, useState } from "react";
-import { PROJECTS_DATA } from "../../components/Projects/ProjectsWrapper";
 import ProjectDetailsWrapper from "../../components/ProjectDetailsWrapper/ProjectDetailsWrapper";
+import { getSingleProject, type ProjectBackResProps } from "../../api/project";
+import { useTranslation } from "react-i18next";
 
-export interface Project {
-  id: number;
-  projectImgUrl: string;
-  title: string;
-  description: string;
-}
+export interface Project extends ProjectBackResProps { }
 
 
 const ProjectDetailsPage = () => {
-  const { id } = useParams(); // id comes from the URL
+  const { id } = useParams();
   const [singleProjectData, setSingleProjectData] = useState<Project | null>(null);
-  console.log(id);
-
+  const { t } = useTranslation();
 
   useEffect(() => {
-    if (id) {
-      const projectId = Number(id);
-      const singleData = PROJECTS_DATA.find(project => project.id === projectId);
-      setSingleProjectData(singleData || null);
-    }
+    const fetchProjectData = async () => {
+      if (id) {
+        const resSingleData = await getSingleProject(id);
+        setSingleProjectData(resSingleData || null);
+      }
+    };
+    fetchProjectData();
   }, [id]);
 
 
   console.log(singleProjectData);
-  if (!singleProjectData) return <div>Loading...</div>;
-
-
+  if (!singleProjectData) return <div>{t("loading")}...</div>;
 
   return (
     <div>

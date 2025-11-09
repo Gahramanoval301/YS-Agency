@@ -211,9 +211,7 @@ const refreshToken = async (req, res) => {
   console.log(decoded, "decodeddd");
 
   const user = await AdminUser.findByPk(decoded.id);
-  console.log(user, "user");
-  console.log(user.refreshToken, "user refresh token");
-  console.log(token, "user token");
+
 
   if (!user || user.refreshToken !== token) {
     return res

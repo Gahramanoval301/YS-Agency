@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 4000;
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "http://localhost:5174"],
     credentials: true,
   })
 );
@@ -27,8 +27,14 @@ app.use("/api/about", require("./routes/aboutRoutes/index"));
 app.use("/api/blog", require("./routes/blogRoutes/index"));
 app.use("/api/category", require("./routes/blogRoutes/categoryRoutes"));
 app.use("/api/partner", require("./routes/partnerRoutes/index"));
-
+app.use("/api/service", require("./routes/serviceRoutes/index"));
+app.use("/api/project", require("./routes/projectRoutes/index"));
+app.use("/api/file-upload", require("./routes/uploadRoutes/index"));
+app.use("/api/contact", require("./routes/contactRoutes/index"));
+app.use("/api/message", require("./routes/clientMessageRoutes/index"));
+app.use("/api/studio", require("./routes/studioRoutes/index"));
 // Start server & sync database
+
 (async () => {
   try {
     await db.sequelize.sync();

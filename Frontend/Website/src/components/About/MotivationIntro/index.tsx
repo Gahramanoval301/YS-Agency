@@ -4,7 +4,6 @@ import type { AboutFormValues } from "../../../api/about";
 import HtmlParser from "../../shared/HtmlParser";
 
 const MotivationIntro = ({ data }: { data: AboutFormValues }) => {
-    console.log(data);
 
     return (
         <div className={styles.motivationIntroContainer}>

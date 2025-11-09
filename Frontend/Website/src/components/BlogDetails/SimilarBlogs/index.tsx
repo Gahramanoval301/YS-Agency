@@ -1,38 +1,11 @@
 import styles from "./SimilarBlogs.module.scss"
-import Gallery1 from "../../../assets/images/Gallery/gallery1.png";
-import Gallery2 from "../../../assets/images/Gallery/gallery2.png";
-import Gallery3 from "../../../assets/images/Gallery/gallery3.png";
 import { useEffect, useState } from "react";
 import { getLastBlogs, type BlogProps } from "../../../api/blog";
 import { formatDate } from "../../../utils/formatDate";
 
-
-const SIMILAR_BLOGS_DATA = [
-  {
-    id: 0,
-    imgUrl: Gallery1,
-    date: "31.03.2025",
-    title: "2025-ci ildə populyar olacaq yeni video məzmun formatları",
-    blogUrl: "",
-  },
-  {
-    id: 1,
-    imgUrl: Gallery2,
-    date: "31.03.2025",
-    title: "2025-ci ildə populyar olacaq yeni video məzmun formatları",
-    blogUrl: "",
-  },
-  {
-    id: 2,
-    imgUrl: Gallery3,
-    date: "31.03.2025",
-    title: "2025-ci ildə populyar olacaq yeni video məzmun formatları",
-    blogUrl: "",
-  },
-]
 const SimilarBlogs = () => {
 
-  const [lastBlogs, setLastBlogs] = useState(null)
+  const [lastBlogs, setLastBlogs] = useState<BlogProps[] | null>(null)
 
   async function fetchLastBlogs() {
     const resData = await getLastBlogs();

@@ -1,144 +1,170 @@
-import React, { useEffect, useState } from "react";
-import { getAllBlogs, deleteBlog, updateBlog, updateBlogData, getCategories } from "../../api/blog";
-import { blogInitialValues, useBlogSchemaValidation, type BlogFormValues } from "../../data/blogFormData";
+import { useEffect, useState } from "react";
+import { getAllBlogs, deleteBlog, updateBlogData, getCategories, type BlogProps } from "../../api/blog";
+import { useBlogSchemaValidation, type BlogFormValues } from "../../data/blogFormData";
 import useFormikForm from "../../hooks/useFormikForm";
 import TextField from "../common/TextField";
 import RichTextField from "../common/RichTextField";
 import MultipleSelectField from "../common/MultipleSelectField";
 import HashtagField from "../common/TagSelectField";
 import ImageField from "../common/ImageField";
-import { Pencil, Trash, Image } from "lucide-react";
+import { Trash, Image } from "lucide-react";
 import styles from "./Blogs.module.css";
 import CreateNewBlogSection from "./CreateNewBlogSection";
+import toast from "react-hot-toast";
 
-const BlogItem = ({ blog, reloadBlogs, options }) => {
-    const [dimensions, setDimensions] = useState(null);
-    const [data, setData] = useState(blog);
+export interface IOption {
+  id: string;
+  title: string;
+}
 
-    const blogSchemaValidation = useBlogSchemaValidation();
+interface BlogItemProps {
+  reloadBlogs: any;
+  blog: BlogProps;
+  options: IOption[] | null;
+}
+const BlogItem = ({ blog, reloadBlogs, options }: BlogItemProps) => {
+  // const [dimensions, setDimensions] = useState(null);
+  const [data, setData] = useState(blog);
 
-    const onSubmit = async (values: BlogFormValues) => {
-        console.log("Updating blog:", values);
+  const blogSchemaValidation = useBlogSchemaValidation();
 
-        const formData = new FormData();
+  const onSubmit = async (values: BlogFormValues) => {
+    try {
 
-        for (const key in values) {
-            if (key === "image") continue; // skip, handled below
-            const value = values[key];
+      const formData = new FormData();
 
-            if (Array.isArray(value)) {
-                // Convert arrays to JSON strings
-                formData.append(key, JSON.stringify(value));
-            } else if (value !== undefined && value !== null) {
-                formData.append(key, value);
-            }
+      for (const key in values) {
+        if (key === "image") continue; 
+        const typedKey = key as keyof BlogFormValues;
+        const value = values[typedKey];
+
+
+        if (Array.isArray(value)) {
+          formData.append(key, JSON.stringify(value));
+        } else if (value !== undefined && value !== null) {
+          formData.append(key, value);
         }
+      }
 
-        // Append file if available
-        if (values.image instanceof File) {
-            formData.append("file", values.image);
-        }
+      if (values.image instanceof File) {
+        formData.append("file", values.image);
+      }
 
-        await updateBlogData(blog.id, formData);
+      const res = await updateBlogData(blog.id, formData);
+      if (res) {
         reloadBlogs();
-    };
+        toast.success("Updated successfully!")
+
+      } else {
+        toast.error("Some error has occured!")
+      }
+
+    } catch {
+      toast.error("Some error has occured!")
+    }
 
 
+  };
 
-    const formik = useFormikForm<BlogFormValues>(
-        {
-            blogTitle: blog.blogTitle,
-            blogContent: blog.blogContent,
-            blogCategories: blog.Categories?.map(cat => cat.id) || [], // ✅ map to ids
-            blogTags: blog.Tags?.map(tag => tag.title) || [],
-            image: blog.blogImgUrl || null,
-        },
-        blogSchemaValidation,
-        onSubmit
-    );
-    console.log(formik.values, blog);
+  const formik = useFormikForm<BlogFormValues>(
+    {
+      blogTitle: blog.blogTitle,
+      blogContent: blog.blogContent,
+      blogCategories: blog.Categories?.map(cat => cat.id) || [], // ✅ map to ids
+      blogTags: blog.Tags?.map(tag => tag.title) || [],
+      image: blog.blogImgUrl || null,
+    },
+    blogSchemaValidation,
+    onSubmit
+  );
 
+  const handleDelete = async () => {
+    try {
 
+      const res = await deleteBlog(blog.id);
+      reloadBlogs();
+      if (res) {
+        toast.success("Deleted succesfully!");
+      }
+    } catch {
+      toast.error("Some error has occured!")
+    }
+  };
 
-    const handleDelete = async () => {
-        await deleteBlog(blog.id);
-        reloadBlogs();
-    };
-
-    return (
-        <form onSubmit={formik.handleSubmit} className={styles.blogContainer}>
-            <div className={styles.headerSection} >
-                <p>#{blog.id}</p>
-                <div className="flex gap-2">
-                    {/* <button type="submit">
+  return (
+    <form onSubmit={formik.handleSubmit} className={styles.blogContainer}>
+      <div className={styles.headerSection} >
+        <p>#{blog.id}</p>
+        <div className="flex gap-2">
+          {/* <button type="submit">
                         <Pencil />
                     </button> */}
-                    <button type="button" onClick={handleDelete}>
-                        <Trash />
-                    </button>
-                </div>
-            </div>
+          <button type="button" onClick={handleDelete}>
+            <Trash />
+          </button>
+        </div>
+      </div>
 
-            <div className={styles.formWrapper}>
+      <div className={styles.formWrapper}>
+        <div>
+          <TextField
+            formik={formik}
+            name="blogTitle"
+            placeholder="Blog name"
+            className="common-text-field"
+            isEdit
+          />
+
+          <RichTextField
+            name="blogContent"
+            value={formik.values.blogContent}
+            placeholder="Blog text"
+            isEdit
+            onChange={(val) => formik.setFieldValue("blogContent", val)}
+          />
+
+          <MultipleSelectField
+            formik={formik}
+            name="blogCategories"
+            options={options?.map(cat => ({
+              value: cat.id,
+              label: cat.title
+            })) || []}
+            placeholder="Categories"
+          />
+
+
+          <HashtagField formik={formik} name="blogTags" placeholder="Add hashtags..." />
+
+        </div>
+        <div>
+          <ImageField
+            data={data}
+            setData={setData}
+            formik={formik}
+            name="image"
+            // setDimensions={setDimensions}
+            label={
+              <label htmlFor="image" className="common-file-field full-width">
+                <Image color="#ffffff66" width={32} height={32} />
                 <div>
-                    <TextField
-                        formik={formik}
-                        name="blogTitle"
-                        placeholder="Blog name"
-                        className="common-text-field"
-                        isEdit
-                    />
-
-                    <RichTextField
-                        name="blogContent"
-                        value={formik.values.blogContent}
-                        placeholder="Blog text"
-                        isEdit
-                        onChange={(val) => formik.setFieldValue("blogContent", val)}
-                    />
-
-                    <MultipleSelectField
-                        formik={formik}
-                        name="blogCategories"
-                        options={options?.map(cat => ({
-                            value: cat.id,
-                            label: cat.title
-                        })) || []}
-                        placeholder="Categories"
-                    />
-
-
-                    <HashtagField formik={formik} name="blogTags" placeholder="Add hashtags..." />
-
+                  <p>Click to upload</p>
+                  <p>or drag and drop</p>
                 </div>
-                <div>
-                    <ImageField
-                        data={data}
-                        setData={setData}
-                        formik={formik}
-                        name="image"
-                        setDimensions={setDimensions}
-                        label={
-                            <label htmlFor="image" className="common-file-field full-width">
-                                <Image color="#ffffff66" width={32} height={32} />
-                                <div>
-                                    <p>Click to upload</p>
-                                    <p>or drag and drop</p>
-                                </div>
-                            </label>
-                        }
-                    />
-                    <div className="btn-wrapper" style={{ marginTop: 0 }}>
-                        <button className="main-btn" style={{ marginTop: 0 }} >
-                            Save
-                        </button>
-                    </div>
-                </div>
-            </div>
+              </label>
+            }
+          />
+          <div className="btn-wrapper" style={{ marginTop: 0 }}>
+            <button className="main-btn" style={{ marginTop: 0 }} >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
 
 
-        </form>
-    );
+    </form>
+  );
 };
 
 const BlogsSection = () => {
@@ -147,17 +173,16 @@ const BlogsSection = () => {
   const [reload, setReload] = useState(0);
   const [options, setOptions] = useState(null);
 
-  // Pagination state
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(1);
-  const limit = 2; // keep it fixed for now
+  const limit = 2;
 
   const fetchBlogs = async () => {
-    const res = await getAllBlogs(page, limit); // ✅ use current page
+    const res = await getAllBlogs(page, limit);
     const resCategories = await getCategories(1, 100);
 
     setBlogs(res.data);
-    setPages(res.pages || 1); // backend already returns total pages
+    setPages(res.pages || 1);
     setOptions(resCategories.data);
   };
 
@@ -178,7 +203,7 @@ const BlogsSection = () => {
         </button>
       </div>
 
-      {isNewCreate && (
+      {isNewCreate && options && (
         <CreateNewBlogSection
           options={options}
           setIsNewCreate={setIsNewCreate}
@@ -188,7 +213,7 @@ const BlogsSection = () => {
 
       <h3 className="text-xl font-semibold">Full Blogs:</h3>
 
-      {blogs.map((blog) => (
+      {blogs.map((blog : BlogProps) => (
         <BlogItem
           key={blog.id}
           blog={blog}

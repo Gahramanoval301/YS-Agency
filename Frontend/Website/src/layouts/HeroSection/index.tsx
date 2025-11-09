@@ -12,7 +12,6 @@ const MainLayout = ({ title, showHeader = true, showFooter = true, showBrands = 
     const [isMounted, setIsMounted] = React.useState(false);
     useEffect(() => { setIsMounted(true); }, []);
 
-
     return (
         <div className={styles.heroIndexBanner}>
             <div className={styles.effectWrapper}>

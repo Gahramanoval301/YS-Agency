@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import JoditEditor from "jodit-react";
 
 interface RichTextFieldProps {
@@ -10,7 +10,7 @@ interface RichTextFieldProps {
 }
 
 export default function RichTextField({
-  name,
+  // name,
   value,
   placeholder = "Enter text...",
   isEdit = true,

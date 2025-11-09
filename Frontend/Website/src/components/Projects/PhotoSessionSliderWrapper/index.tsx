@@ -1,7 +1,6 @@
 import styles from "./PhotoSessionSliderWrapper.module.scss"
 import { useRef } from 'react';
 
-import Gallery1 from "../../../assets/images/Gallery/gallery1.png";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -16,8 +15,11 @@ import './index.css';
 
 // import required modules
 import { Navigation } from 'swiper/modules';
+import type { PhotoGallerySection } from "../../../api/project";
 
-const PhotoSessionSliderWrapper = () => {
+const PhotoSessionSliderWrapper = ({ data }: { data: PhotoGallerySection[] }) => {
+    console.log(data);
+
     const prevRef = useRef<HTMLButtonElement>(null);
     const nextRef = useRef<HTMLButtonElement>(null);
     return (
@@ -31,20 +33,19 @@ const PhotoSessionSliderWrapper = () => {
                     }}>➡</button>
                 </div>
                 <Swiper
-
-                    loop={true}
+                    loop={data.length > 5 ? true : false}
                     breakpoints={{
-                        0:{
-                                slidesPerView:1,
-                                spaceBetween:10,
+                        0: {
+                            slidesPerView: 1,
+                            spaceBetween: 10,
                         },
-                        580:{
-                                slidesPerView:3,
-                                spaceBetween:10,
+                        580: {
+                            slidesPerView: 3,
+                            spaceBetween: 10,
                         },
-                        640:{
-                                slidesPerView:3.5,
-                                spaceBetween:10,
+                        640: {
+                            slidesPerView: 3.5,
+                            spaceBetween: 10,
                         },
                         850: { // mobile
                             slidesPerView: 4,
@@ -66,15 +67,16 @@ const PhotoSessionSliderWrapper = () => {
                     className="mySwiper"
                 >
 
-                    {[...Array(5)].map((num) => (
+                    {data.map((gallery) => (
 
-                        <SwiperSlide key={num}>
-                            <div className="imageWrapper">
+                        <SwiperSlide key={gallery.imgFileId}>
+                            <div className={styles.imageWrapper}>
 
-                                <img src={Gallery1} alt="gallery" />
+                                <img src={gallery.imgUrl} alt={`${gallery.title}`} />
                             </div>
                         </SwiperSlide>
                     ))}
+
                 </Swiper>
             </div>
         </div>

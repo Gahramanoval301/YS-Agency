@@ -1,33 +1,30 @@
-import React, { useEffect, useState } from 'react'
-import SingleSelectField from '../common/SingleSelectField'
-import { categoryInitialValues, useCategorySchemaValidation, type CategoryFormValues } from '../../data/blogFormData';
-import useFormikForm from '../../hooks/useFormikForm';
+import { useEffect, useState } from 'react'
 import { createCategory, deleteCategory, getCategories, updateCategory } from '../../api/blog';
-import TextField from '../common/TextField';
 import { Pencil, Trash2 } from 'lucide-react';
+import toast from 'react-hot-toast';
+import type { IOption } from './BlogsSection';
 
 const CategorySection = () => {
     const [isNewCreate, setIsNewCreate] = useState(false);
     const [categoryTitle, setCategoryTitle] = useState("");
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState<any>([]);
     const [reload, setReload] = useState(0);
-    const [singleEditData, setSingleEditData] = useState(null);
+    const [singleEditData, setSingleEditData] = useState<any>(null);
 
-    // pagination states
     const [page, setPage] = useState(1);
     const [pages, setPages] = useState(1);
-    const limit = 5; // limit per page
+    const limit = 5;
 
-    const handleSubmitCreateCat = async (e) => {
+    const handleSubmitCreateCat = async (e: React.MouseEvent<HTMLButtonElement | HTMLFormElement>) => {
         e.preventDefault();
-        if (!categoryTitle.trim()) return; // prevent empty submission
+        if (!categoryTitle.trim()) return;
 
         const resData = await createCategory({ title: categoryTitle });
         console.log(resData);
 
-        setCategoryTitle(""); // reset input
-        setPage(1);           // reset pagination to first page
-        fetchCategories(1);   // fetch first page after adding new category
+        setCategoryTitle("");
+        setPage(1);
+        fetchCategories(1);
     };
 
     const fetchCategories = async (pageNumber = 1, append = false) => {
@@ -35,16 +32,23 @@ const CategorySection = () => {
         setPages(resData.pages);
 
         if (append) {
-            setCategories((prev) => [...prev, ...resData.data]);
+            setCategories((prev:any) => [...prev, ...resData.data]);
         } else {
             setCategories(resData.data);
         }
     };
 
-    const handleUpdateCat = async (singleCat) => {
-        const resData = await updateCategory(singleCat.id, { title: singleCat.title });
-        setSingleEditData(null);
-        setReload((prev) => prev + 1);
+    const handleUpdateCat = async (singleCat: IOption) => {
+        try {
+            const resData = await updateCategory(singleCat.id, { title: singleCat.title });
+            if (resData) {
+                toast.success("Updated successfully!")
+            }
+            setSingleEditData(null);
+            setReload((prev) => prev + 1);
+        } catch {
+            toast.error("Some error has occured!")
+        }
     };
 
     useEffect(() => {
@@ -59,9 +63,19 @@ const CategorySection = () => {
         }
     };
 
-    const deleteSingleCategory = async (catId) => {
-        const resData = await deleteCategory(catId);
-        setReload((prev) => prev + 1);
+    const deleteSingleCategory = async (catId: string) => {
+        try {
+
+            const resData = await deleteCategory(catId);
+            if (resData) {
+                setReload((prev) => prev + 1);
+                toast.success("Deleted successfully!")
+            } else {
+                toast.error("Error has occured!")
+            }
+        } catch {
+            toast.error("Error has occured!")
+        }
     };
 
     return (
@@ -94,7 +108,7 @@ const CategorySection = () => {
 
                     <div className=" category-list mt-4 ">
                         {categories && categories.length > 0 ? (
-                            categories.map((cat) => (
+                            categories.map((cat: IOption) => (
                                 <div
                                     key={cat.id}
                                     className="category-item rounded border border-gray-300 flex flex-col gap-2"
@@ -129,7 +143,7 @@ const CategorySection = () => {
                                                 className="common-text-field flex-1"
                                                 value={singleEditData.title}
                                                 onChange={(e) =>
-                                                    setSingleEditData((prev) => prev && { ...prev, title: e.target.value })
+                                                    setSingleEditData((prev: any) => prev && { ...prev, title: e.target.value })
                                                 }
                                             />
                                             <button

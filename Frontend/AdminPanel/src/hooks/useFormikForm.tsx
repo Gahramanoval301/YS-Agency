@@ -1,4 +1,6 @@
-import { useFormik, FormikHelpers, FormikValues } from "formik";
+import { useFormik } from "formik";
+import type { FormikHelpers, FormikValues } from "formik";
+
 import { ObjectSchema } from "yup";
 
 type SubmitFunction<T> = (
@@ -9,12 +11,14 @@ type SubmitFunction<T> = (
 const useFormikForm = <T extends FormikValues>(
   initialValues: T,
   validationSchema: ObjectSchema<object>,
-  onSubmit: SubmitFunction<T>
+  onSubmit: SubmitFunction<T>,
+  enableReinitialize?: boolean
 ) => {
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit,
+    enableReinitialize: enableReinitialize ?? false
   });
 
   return formik;

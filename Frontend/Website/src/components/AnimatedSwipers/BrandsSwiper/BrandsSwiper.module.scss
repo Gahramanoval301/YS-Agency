@@ -32,78 +32,84 @@
     justify-content: center;
     align-items: center;
     z-index: auto;
-    mix-blend-mode: screen; // or lighten
+    mix-blend-mode: screen;
+    overflow: hidden;
+    background-color: #ffffff0a;
 
 
-    .dotLeft,
-    .dotRight {
-        transform: rotate(var(--rotate-angle, 0deg));
-        transform-origin: center center;
-    }
-
-
-    .dotLeft {
-        width: 8px;
-        height: 8px;
-        background-color: #fff;
-        border-radius: 50%;
+    .circleDesignWrapper {
         position: absolute;
-        left: 0;
-        bottom: 60px;
-        z-index: 50;
     }
 
-    .dotRight {
-        width: 8px;
-        height: 8px;
-        background-color: #fff;
-        border-radius: 50%;
-        position: absolute;
-        right: -15px;
-        top: 100px;
-        z-index: 50;
-
-    }
-
-    .rotatingDots {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        transform: rotate(var(--rotate-angle, 0deg));
-        transform-origin: center center;
-        pointer-events: none; // optional
-        z-index: 100;
-    }
+    // .dotLeft,
+    // .dotRight {
+    //     transform: rotate(var(--rotate-angle, 0deg));
+    //     transform-origin: center center;
+    // }
 
 
-    &::before {
-        content: "";
-        position: absolute;
-        width: 110%;
-        height: 110%;
-        top: -5%;
-        left: -5%;
-        border-top: none;
-        border-right: 1px solid #fff;
-        border-bottom: 1px solid #fff;
-        border-radius: 50%;
-        transform: rotate(var(--rotate-angle, 0deg));
-    }
+    // .dotLeft {
+    //     width: 8px;
+    //     height: 8px;
+    //     background-color: #fff;
+    //     border-radius: 50%;
+    //     position: absolute;
+    //     left: 0;
+    //     bottom: 60px;
+    //     z-index: 50;
+    // }
 
-    &::after {
-        content: "";
-        position: absolute;
-        width: 110%;
-        height: 110%;
-        top: -5%;
-        left: -5%;
-        border-left: 5px solid $pink;
-        border-top: 5px solid $pink;
-        border-radius: 50%;
-        transform: rotate(var(--rotate-angle, 0deg));
-    }
+    // .dotRight {
+    //     width: 8px;
+    //     height: 8px;
+    //     background-color: #fff;
+    //     border-radius: 50%;
+    //     position: absolute;
+    //     right: -15px;
+    //     top: 100px;
+    //     z-index: 50;
+
+    // }
+
+    // .rotatingDots {
+    //     position: absolute;
+    //     width: 100%;
+    //     height: 100%;
+    //     top: 0;
+    //     left: 0;
+    //     transform: rotate(var(--rotate-angle, 0deg));
+    //     transform-origin: center center;
+    //     pointer-events: none; // optional
+    //     z-index: 100;
+    // }
+
+
+    // &::before {
+    //     content: "";
+    //     position: absolute;
+    //     width: 110%;
+    //     height: 110%;
+    //     top: -5%;
+    //     left: -5%;
+    //     border-top: none;
+    //     border-right: 1px solid #fff;
+    //     border-bottom: 1px solid #fff;
+    //     border-radius: 50%;
+    //     transform: rotate(var(--rotate-angle, 0deg));
+    // }
+
+    // &::after {
+    //     content: "";
+    //     position: absolute;
+    //     width: 110%;
+    //     height: 110%;
+    //     top: -5%;
+    //     left: -5%;
+    //     border-left: 5px solid $pink;
+    //     border-top: 5px solid $pink;
+    //     border-radius: 50%;
+    //     transform: rotate(var(--rotate-angle, 0deg));
+    // }
 }
 
 .btnContainer {
@@ -120,6 +126,12 @@
     button {
         color: #fff;
     }
+}
+
+.partnerImgWrapper {
+    width: 80%;
+    height: 60%;
+    object-fit: cover;
 }
 
 @media screen and (max-width:768px) {

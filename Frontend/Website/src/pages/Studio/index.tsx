@@ -2,11 +2,27 @@ import styles from "./Studio.module.scss"
 import Header from '../../layouts/Header'
 import Footer from '../../layouts/Footer'
 import CircularText from '../../styles/animations/CircularText'
+import { useEffect, useState } from "react"
+import { getStudioData, type StudioBackResProps } from "../../api/studio"
+import HtmlParser from "../../components/shared/HtmlParser"
+import { useTranslation } from "react-i18next"
+import StudioBackground from "../../assets/images/Gallery/studioBackground.png";
 
 const Studio = () => {
+    const { t } = useTranslation();
+    const [studioData, setStudioData] = useState<StudioBackResProps | null>(null);
+
+    const fetchStudiioData = async () => {
+        const resStudio = await getStudioData();
+        setStudioData(resStudio.data);
+    }
+
+    useEffect(() => {
+        fetchStudiioData();
+    }, [])
+
     return (
         <div className={styles.studioContainer}>
-
             <div className={styles.studioWrapper}>
                 <Header />
             </div>
@@ -14,7 +30,7 @@ const Studio = () => {
                 <div className={styles.titleContainer}>
                     <div className={styles.titleWrapper}>
                         <h1>
-                            Studiya
+                            {t("studio")}
                         </h1>
                     </div>
                     <div className={styles.circularTextWrapper}>
@@ -28,17 +44,37 @@ const Studio = () => {
 
                 <div className={styles.contentWrapper}>
 
-                    <p>
-                        YS Agency gənc və enerjili komanda olaraq, sosial media strategiyaları sahəsində ixtisaslaşmışdır. Missiyamız brendlərin rəqəmsal məkanda fərqlənərək innovativ və nəticəyönümlü marketinq yanaşmaları ilə maksimum potensialına çatmasına dəstək olmaqdır.
-                    </p>
-                    <br />
-                    <p>
-                        Bu yaxınlarda @ysagency.studio adlı müasir studiyamızı təqdim etdik. Müxtəlif növ fotosessiyalar üçün nəzərdə tutulmuş bu məkan qabaqcıl işıqlandırma və fərqli fon seçimi imkanları ilə yaradıcılığın sərhədlərini genişləndirir.
-                    </p>
-                    <br />
-                    <p>
-                        YS Agency olaraq, hər bir müştərinin ehtiyaclarına xüsusi diqqət yetiririk və hər layihəmizdə yüksək keyfiyyət və effektiv nəticələr təmin etməyə çalışırıq.  @YsAgency.az ilə əməkdaşlıq edin, brendinizin daha parlaq görünməsini, auditoriyanızın diqqəti cəlb etməsini və rəqəmsal mühitdə uğurlarınızın zirvəyə çatdırmağınızı təmin edək!
-                    </p>
+                    {studioData?.content &&
+                        <>
+                            <HtmlParser data={studioData?.content} />
+                        </>
+                    }
+                </div>
+                <div>
+
+                    <div className={styles.studioBackWrapper}>
+                        <img src={StudioBackground} alt="Studio Background" />
+                    </div>
+                </div>
+                <div className={styles.imageSection}>
+                    <div className={`${styles.imgWrapper}`}>
+                        <img src={studioData?.images[0].imgUrl} alt={`${studioData?.headline}-${studioData?.images[0].imgFileId} `} />
+                    </div>
+                    <div className={styles.secondLineImgWrapper}>
+                        <div className={`${styles.imgWrapper}`}>
+                            <img src={studioData?.images[1].imgUrl} alt={`${studioData?.headline}-${studioData?.images[1].imgFileId} `} />
+                        </div>
+                        <div className={`${styles.imgWrapper}`}>
+                            <img src={studioData?.images[2].imgUrl} alt={`${studioData?.headline}-${studioData?.images[2].imgFileId} `} />
+                        </div>
+                        <div className={`${styles.imgWrapper}`}>
+                            <img src={studioData?.images[3].imgUrl} alt={`${studioData?.headline}-${studioData?.images[3].imgFileId} `} />
+                        </div>
+                    </div>
+                    <div className={`${styles.imgWrapper}`}>
+                        <img src={studioData?.images[4].imgUrl} alt={`${studioData?.headline}-${studioData?.images[4].imgFileId} `} />
+                    </div>
+
                 </div>
             </div>
             <Footer />

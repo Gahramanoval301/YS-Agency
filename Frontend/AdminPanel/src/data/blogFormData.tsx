@@ -6,7 +6,7 @@ export interface BlogFormValues {
     blogContent: string;
     blogCategories: string[];
     blogTags: string[];
-    image: File | null;
+    image: File | null | string;
 }
 
 export const blogInitialValues = {

@@ -1,0 +1,104 @@
+.gridGallerySwiperContainer {
+  /* min-height: 900px; */
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #444;
+    height: calc((100% - 30px) / 2) !important;
+
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.gridGallerySwiperContainer {
+  position: relative;
+  .swiperChangeBtnWrapper {
+    display: flex;
+    width: 200px;
+    background-color: #504a4a;
+    border-radius: 4px;
+    position: absolute;
+    bottom: 20%;
+    left: 45%;
+    z-index: 999999909;
+
+    button {
+      padding: 0.8rem 0.6rem;
+      color: white;
+      opacity: 0.6;
+      transition: all 0.3s ease-in-out;
+      font-size: 16px;
+    }
+    button.active {
+      opacity: 1;
+    }
+    button:first-child {
+      flex: 1;
+      border-right: 1px solid rgba(255, 255, 255, 0.107);
+    }
+    button:last-child {
+      flex: 1;
+    }
+    button:hover {
+      background-color: #585555;
+    }
+  }
+  .swiper {
+    padding-bottom: 5rem;
+
+    .swiper-pagination {
+      position: relative;
+      top: 0px;
+      z-index: 9999999999;
+
+      .swiper-pagination-bullet {
+        background-color: #a2a1a1;
+      }
+
+      .swiper-pagination-bullet-active {
+        opacity: 1;
+        width: 40px;
+        height: 40px;
+        background: url("/mainIconRight.png") no-repeat center center;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .gridGallerySwiperContainer {
+    position: relative;
+    .swiperChangeBtnWrapper {
+      left: 40%;
+    }
+  }
+}
+
+@media screen and (max-width: 790px) {
+  .gridGallerySwiperContainer {
+    position: relative;
+    .swiperChangeBtnWrapper {
+      left: 35%;
+    }
+  }
+}
+@media screen and (max-width: 576px) {
+  .gridGallerySwiperContainer {
+    position: relative;
+    .swiperChangeBtnWrapper {
+      left: 30%;
+    }
+  }
+}
+@media screen and (max-width: 450px) {
+  .gridGallerySwiperContainer {
+    position: relative;
+    .swiperChangeBtnWrapper {
+      left: 25%;
+      bottom: 15%;
+    }
+  }
+}

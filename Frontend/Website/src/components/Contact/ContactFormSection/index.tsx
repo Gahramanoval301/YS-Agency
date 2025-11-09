@@ -2,26 +2,41 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import styles from "./ContactFormSection.module.scss";
-
-const schema = Yup.object().shape({
-    firstName: Yup.string()
-        .required("Adınızı daxil edin")
-        .min(2, "Minimum 2 simvol"),
-    lastName: Yup.string()
-        .required("Soyadınızı daxil edin")
-        .min(2, "Minimum 2 simvol"),
-    email: Yup.string()
-        .email("Düzgün e-poçt daxil edin")
-        .required("E-poçt tələb olunur"),
-    phone: Yup.string()
-        .matches(/^\+?\d{9,15}$/, "Düzgün telefon nömrəsi daxil edin")
-        .required("Telefon nömrəsi tələb olunur"),
-    message: Yup.string()
-        .required("Mesaj boş ola bilməz")
-        .min(5, "Minimum 5 simvol"),
-});
+import { useEffect, useState } from "react";
+import { getAllContactDetails, sendClientMessage, type ContactInfo } from "../../../api/contact";
+import { useTranslation } from "react-i18next";
 
 const ContactFormSection = () => {
+    const [contactDetails, setContactDetails] = useState<null | ContactInfo>(null);
+    const { t } = useTranslation();
+
+    const schema = Yup.object().shape({
+        firstName: Yup.string()
+            .required(t("enteryourname"))
+            .min(2, t("minimum2symbol")),
+        lastName: Yup.string()
+            .required(t("enteryourlastname"))
+            .min(2, t("minimum2symbol")),
+        email: Yup.string()
+            .email(t("pleaseenteravalidemail"))
+            .required(t("emailisrequired")),
+        phoneNumber: Yup.string()
+            .matches(/^\+?\d{9,15}$/, t("pleaseenteravalidphonenumber"))
+            .required(t("phonenumberisrequired")),
+        comment: Yup.string()
+            .required(t("messagecannotbeempty"))
+            .min(5, t("minimum5symbol")),
+    });
+
+    const fetchContactDetails = async () => {
+        const resContactDetails = await getAllContactDetails();
+        setContactDetails(resContactDetails.contact);
+    };
+
+    useEffect(() => {
+        fetchContactDetails();
+    }, []);
+
     const {
         register,
         handleSubmit,
@@ -33,36 +48,39 @@ const ContactFormSection = () => {
     });
 
     const onSubmit = async (data) => {
-        console.log("Göndərilən məlumat:", data);
-        alert("Mesajınız göndərildi!");
-        reset();
+        const resData = await sendClientMessage(data);
+
+        if (resData) {
+            alert(t("thankyouforcontactingusyourmessagehasbeensentsuccessfullyandwellgetbacktoyoushortly"))
+            reset();
+        }
     };
 
     return (
         <div className={styles.contactFormContainer}>
             <iframe
-                title="YS Agency Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3039.222927409998!2d49.87352987586586!3d40.381751571445285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x883ae7521aa383d7%3A0xe24c638ef093d115!2sYS%20Agency!5e0!3m2!1saz!2saz!4v1759859651333!5m2!1saz!2saz"
+                title={contactDetails?.cardsData[3].type}
+                src={contactDetails?.cardsData[3].value}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
 
             <div className={styles.contactFormWrapper}>
-                <h3>Gəlin marketinqin əsl dəyərini birlikdə kəşf edək!</h3>
-                <p>Bizə suallarınızı, təkliflərinizi və layihə ideyalarınızı göndərə bilərsiniz.</p>
+                <h3>{t("letsdiscoverthetruevalueofmarketingtogether")}</h3>
+                <p>{t("youcansendusyourquestionssuggestionsandprojectideas")}</p>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className={styles.formSmallSection}>
                         <div className={styles.inputGroup}>
-                            <input {...register("firstName")} placeholder="Adınız" />
+                            <input {...register("firstName")} placeholder={t("yourname")} />
                             {errors.firstName && (
                                 <span className={styles.error}>{errors.firstName.message}</span>
                             )}
                         </div>
 
                         <div className={styles.inputGroup}>
-                            <input {...register("lastName")} placeholder="Soyadınız" />
+                            <input {...register("lastName")} placeholder={t("yourlastname")} />
                             {errors.lastName && (
                                 <span className={styles.error}>{errors.lastName.message}</span>
                             )}
@@ -71,32 +89,32 @@ const ContactFormSection = () => {
 
                     <div className={styles.formSmallSection}>
                         <div className={styles.inputGroup}>
-                            <input {...register("email")} placeholder="E-poçt Ünvanınız" />
+                            <input {...register("email")} placeholder={t("youremail")} />
                             {errors.email && (
                                 <span className={styles.error}>{errors.email.message}</span>
                             )}
                         </div>
 
                         <div className={styles.inputGroup}>
-                            <input {...register("phone")} placeholder="Telefon nömrəniz" />
-                            {errors.phone && (
-                                <span className={styles.error}>{errors.phone.message}</span>
+                            <input {...register("phoneNumber")} placeholder={t("yourphonenumber")} />
+                            {errors.phoneNumber && (
+                                <span className={styles.error}>{errors.phoneNumber.message}</span>
                             )}
                         </div>
                     </div>
 
                     <div className={styles.inputGroup}>
                         <input
-                            {...register("message")}
-                            placeholder="Mesajınızı yazın..."
+                            {...register("comment")}
+                            placeholder={t("writeyourmessage")}
                         />
-                        {errors.message && (
-                            <span className={styles.error}>{errors.message.message}</span>
+                        {errors.comment && (
+                            <span className={styles.error}>{errors.comment.message}</span>
                         )}
                     </div>
 
                     <button type="submit" disabled={isSubmitting}>
-                        {isSubmitting ? "Göndərilir..." : "Göndər"}
+                        {isSubmitting ? t("sending") : t("send")}
                     </button>
                 </form>
             </div>

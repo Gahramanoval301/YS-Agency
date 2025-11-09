@@ -2,8 +2,8 @@ import React from "react";
 import { getIn } from "formik";
 
 interface TextFieldProps {
-    formik: any; // Formik instance
-    name: string; // path to value e.g. "texts[0].headline" or "statistics.projects"
+    formik: any;
+    name: string;
     placeholder?: string;
     type?: string;
     className: string;
@@ -11,32 +11,42 @@ interface TextFieldProps {
     rows?: number;
     isEdit?: boolean;
     errorAbsoluteStyle?: boolean;
+    icon?: React.ReactNode; // 👈 new prop
 }
 
-const TextField: React.FC<TextFieldProps> = ({ formik, name, placeholder, isEdit, type = "text", className, multiline, rows, errorAbsoluteStyle=false }) => {
+const TextField: React.FC<TextFieldProps> = ({
+    formik,
+    name,
+    placeholder,
+    isEdit,
+    type = "text",
+    className,
+    multiline,
+    rows,
+    errorAbsoluteStyle = false,
+    icon, // 👈 new prop
+}) => {
     const value = getIn(formik.values, name);
     // const error = getIn(formik.errors, name);
-    const touched = getIn(formik.touched, name);
-
-    console.log("formik errors", formik.errors[name], name);
-
+    // const touched = getIn(formik.touched, name);
 
     return (
-        <div style={{ marginBottom: "1rem" }}>
+        <div style={{ marginBottom: "1rem", position: "relative" }}>
             {multiline ? (
                 <textarea
-                    className={className}
+                    className={`${className} pr-10`} // add padding-right to make space for icon
                     name={name}
                     placeholder={placeholder}
                     value={value}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     rows={rows}
+                    readOnly={!isEdit}
                 />
             ) : (
                 <input
                     readOnly={!isEdit}
-                    className={className}
+                    className={`${className} pr-10`} // 👈 padding-right so text doesn't overlap icon
                     name={name}
                     type={type}
                     placeholder={placeholder}
@@ -46,7 +56,24 @@ const TextField: React.FC<TextFieldProps> = ({ formik, name, placeholder, isEdit
                 />
             )}
 
+            {/* 👇 Icon container */}
+            {icon && (
+                <span
+                    style={{
+                        position: "absolute",
+                        right: "10px",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        cursor: isEdit ? "pointer" : "default",
+                        opacity: isEdit ? 1 : 0.6,
+                    }}
+                >
+                    {icon}
+                </span>
+            )}
+
             {formik.errors[name] && <div className={`common-error-style ${errorAbsoluteStyle ? "absolute-error-style" : ""}`}  >{formik.errors[name]}</div>}
+
         </div>
     );
 };

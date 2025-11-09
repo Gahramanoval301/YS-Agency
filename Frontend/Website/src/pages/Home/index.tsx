@@ -11,12 +11,15 @@ import GlareHover from "../../styles/animations/GlareHover";
 import ScrollDownIcon from "../../assets/icons/scroll-down.svg";
 import BrandsSwiper from "../../components/AnimatedSwipers/BrandsSwiper";
 import Footer from "../../layouts/Footer";
-import MixGallerySwiper from "../../components/AnimatedSwipers/GridGallerySwiper";
+import MixGallerySwiper from "../../components/AnimatedSwipers/MixGallerySwiper";
 import ServicesSwiper from "../../components/AnimatedSwipers/ServicesSwiper";
 import LastBlogs from "../../components/Home/LastBlogs";
-
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 
 const Home: FC = () => {
+    const { t } = useTranslation();
+
     return (
         <main >
             <div className={styles.homeContainer}>
@@ -33,7 +36,6 @@ const Home: FC = () => {
 
                 <div className={styles.content}>
 
-
                     <div className={styles.splineContainer}>
 
                         <div className={styles.headContentBox}>
@@ -41,7 +43,7 @@ const Home: FC = () => {
                             <AnimatedText text="YS AGENCY!" fontSize="100px" parentClassname="splitTextContainer1" />
                             <div className={styles.customShinyTextWrapper}>
                                 <AnimatedShinyText
-                                    text="Your professional partner"
+                                    text={t("yourprofessionalpartner")}
                                     className="customShinyText1"
                                 />
                             </div>
@@ -52,32 +54,34 @@ const Home: FC = () => {
                             <AnimatedGradientText
                                 colors={["#fff", "#00000062"]}
                                 className={"customGradientText1"}
-                                title={"We’re young, mobile, and social!"}
+                                title={t("wereyoungmobileandsocial")}
                             />
                             <img
                                 src={ScrollDownIcon}
                                 alt="scroll down"
                                 className={styles.scrollDownIcon}
                             />
-                            {/* <ScrollDownIcon /> */}
                         </div>
                         <Spline scene="https://prod.spline.design/9RqwuXhAEKPpsA0l/scene.splinecode" />
 
                         <div className={styles.homeFooter}>
-                            <AnimatedShinyText text="Deep Within Our Universe"
+                            <AnimatedShinyText text={t("deepwithinouruniverse")}
                                 className="customShinyText2"
                                 speed={2} />
 
-                            <GlareHover
-                                glareColor="#ffffff"
-                                width={"190px"}
-                                height={"60px"}
-                                playOnce={false}
-                                className="seeAll"
+                            <Link to={"/projects"} target={"_blank"}
+                                rel="noopener noreferrer">
+                                <GlareHover
+                                    glareColor="#ffffff"
+                                    width={"190px"}
+                                    height={"60px"}
+                                    playOnce={false}
+                                    className="seeAll"
 
-                            >
-                                <p>Hamısına Bax</p>
-                            </GlareHover>
+                                >
+                                    <p>{t("all")}</p>
+                                </GlareHover>
+                            </Link>
                         </div>
                     </div>
 
@@ -87,7 +91,7 @@ const Home: FC = () => {
 
             <MixGallerySwiper />
             <ServicesSwiper />
-            <LastBlogs/>
+            <LastBlogs />
             <div className={styles.homeBodyWrapper}>
 
                 <div className="brandsSwiperContainer" style={{

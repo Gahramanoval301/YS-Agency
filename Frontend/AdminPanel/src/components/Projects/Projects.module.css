@@ -1,0 +1,11 @@
+.gridContentWrapper {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1rem;
+}
+@media screen and (max-width: 1024px) {
+  .gridContentWrapper {
+    grid-template-columns: 1fr;
+  }
+}

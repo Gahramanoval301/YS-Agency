@@ -1,0 +1,19 @@
+.gridImgSectionWrapper {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr 2fr;
+  margin-top: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+.photoDescSectionWrapper {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 2fr 1fr;
+}
+
+.gallerySectionWrapper {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr 1fr 1fr;
+}

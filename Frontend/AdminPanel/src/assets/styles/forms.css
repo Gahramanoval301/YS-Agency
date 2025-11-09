@@ -60,7 +60,11 @@ textarea {
 .purple-text-field {
   color: #ff5cfc;
 }
-
+.partners.image-wrapper {
+  width: 100% !important;
+  height: 250px !important;
+  /* width: 200px !important; */
+}
 .image-wrapper {
   position: relative;
   height: 350px;
@@ -86,11 +90,14 @@ textarea {
 .common-file-field.full-width {
   width: 100% !important;
 }
+.common-file-field.full-width.partners {
+  height: 250px !important;
+}
 .common-file-field {
   padding: 10px 16px;
   cursor: pointer;
   text-align: center;
-  height: 350px;
+  height: 150px;
   width: 500px !important;
   width: 100%;
   outline: 2px dashed #ccc;
@@ -172,6 +179,13 @@ textarea {
     margin-top: 2rem;
     text-align: right;
   }
+}
+
+.common-label {
+  display: block;
+  color: #ffffff99;
+  font-size: 14px;
+  margin-bottom: 4px;
 }
 
 .common-error-style {
@@ -300,6 +314,26 @@ textarea {
   font-weight: 600;
 }
 
+/* common service field */
+.common-text-field {
+  width: 100%;
+  margin: auto;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 10px 16px;
+  background: linear-gradient(to left, #1e1e23, #211f27) padding-box,
+    linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.14),
+        rgba(255, 255, 255, 0.301)
+      )
+      border-box;
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  display: inline-flex;
+  color: #fff;
+  cursor: pointer;
+}
 /* --- Animation --- */
 @keyframes fadeIn {
   from {
@@ -429,4 +463,16 @@ textarea {
   background: #eef3ff;
   color: #ff5cfc;
   border-radius: 9999px;
+}
+
+.headline-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  .headline {
+    font-weight: 600;
+    font-size: 18px;
+  }
 }

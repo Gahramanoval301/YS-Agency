@@ -4,23 +4,25 @@ import BlogsContainer from "../BlogsContainer";
 import CustomSelect from "../../shared/CustomSelect";
 import { getAllBlogs, getCategories, type BlogProps, type CategoryProps } from "../../../api/blog";
 import { useSearchParams } from "react-router";
-
-
+import { useTranslation } from "react-i18next";
+import LeftArrow from "../../../assets/images/Gallery/leftArrow.png";
+import RightArrow from "../../../assets/images/Gallery/rightArrow.png";
+import MainIconRight from "../../../assets/images/Gallery/mainIconRight.png";
 
 const BlogsWrapper = () => {
     const [searchValue, setSearchValue] = useState("");
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
-    const [selectedTag, setSelectedTag] = useState<string | null>(null) // optional if needed
+    const [selectedTag, setSelectedTag] = useState<string | null>(null)
     const [searchParams, setSearchParams] = useSearchParams();
 
     const [isMobile, setIsMobile] = useState(false)
     const [categories, setCategories] = useState<CategoryProps[] | null>(null)
     const [blogSizeLimit, setBlogSizeLimit] = useState(9)
     const [blogs, setBlogs] = useState<BlogProps[] | null>(null)
-    // Pagination state
-    const [page, setPage] = useState(1)
-    const [pages, setPages] = useState(1) // total pages from backend
 
+    const [page, setPage] = useState(1)
+    const [pages, setPages] = useState(1)
+    const { t } = useTranslation();
 
     const fetchData = async () => {
         const resCategories = await getCategories(1, 100)
@@ -35,7 +37,6 @@ const BlogsWrapper = () => {
         setBlogs(resBlogs.data)
         setPages(resBlogs.pages || 1) // total pages from backend
     }
-    console.log(blogs);
 
     useEffect(() => {
         fetchData();
@@ -77,12 +78,12 @@ const BlogsWrapper = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value)
-        setPage(1) // reset to first page when searching
+        setPage(1)
     }
 
     const handleCategorySelect = (id: string | null) => {
         setSelectedCategory(id)
-        setPage(1) // reset to first page when selecting category
+        setPage(1)
     }
 
 
@@ -94,7 +95,7 @@ const BlogsWrapper = () => {
                         type="text"
                         id="search"
                         name="search"
-                        placeholder="Axtar..."
+                        placeholder={`${t("search")}...`}
                         value={searchValue}
                         onChange={handleChange}
                     />
@@ -112,15 +113,15 @@ const BlogsWrapper = () => {
                                 selectBoxStyles={{ maxWidth: "350px" }}
                                 selectContainerStyles={{ marginLeft: "auto" }}
                                 options={categories}
-                                placeholder="Select Category"
+                                placeholder={t("selectcategory")}
                                 onChange={(val) => handleCategorySelect(val?.id || null)}
                             />
                             :
                             <div className={styles.filterBtnsContainer}>
                                 {
                                     categories.map(filterBtn => (
-                                        <button key={filterBtn.id} onClick={(val) => handleCategorySelect(filterBtn?.id || null)}>
-                                            <i>🌸</i>
+                                        <button key={filterBtn.id} onClick={(_) => handleCategorySelect(filterBtn?.id || null)}>
+                                            <img src={MainIconRight} alt="main icon right flower" />
                                             <p>{filterBtn.title}</p>
                                         </button>
                                     ))
@@ -130,7 +131,10 @@ const BlogsWrapper = () => {
                 </>
             }
 
-            <BlogsContainer setBlogSizeLimit={setBlogSizeLimit} blogs={blogs} />
+            {
+
+                blogs && <BlogsContainer setBlogSizeLimit={setBlogSizeLimit} blogs={blogs} />
+            }
 
             <div className={styles.blogPaginationWrapper} style={{ marginBlock: "2rem" }}>
                 <button
@@ -139,12 +143,12 @@ const BlogsWrapper = () => {
                     disabled={page <= 1}
                     onClick={() => setPage(prev => Math.max(prev - 1, 1))}
                 >
-                    ← Previous
+                    <img src={LeftArrow} alt="left arrow" />
                 </button>
 
-                <span>
+                {/* <span>
                     Page <strong>{page}</strong> of <strong>{pages}</strong>
-                </span>
+                    </span> */}
 
                 <button
                     type="button"
@@ -152,7 +156,7 @@ const BlogsWrapper = () => {
                     disabled={page >= pages}
                     onClick={() => setPage(prev => Math.min(prev + 1, pages))}
                 >
-                    Next →
+                    <img src={RightArrow} alt="right arrow" />
                 </button>
             </div>
         </div>

@@ -2,11 +2,12 @@ import { RouterProvider } from "react-router-dom"
 import { router } from "./router"
 import { useEffect } from "react";
 import { refreshToken } from "./api/auth";
+import { Toaster } from 'react-hot-toast';
 
 function App() {
 
   async function refreshUserToken() {
-    const res = await refreshToken();
+    await refreshToken();
   }
 
   useEffect(() => {
@@ -19,6 +20,29 @@ function App() {
 
   return (
     <>
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: '#333',
+            color: '#fff',
+          },
+          success: {
+            iconTheme: {
+              primary: 'green',
+              secondary: 'white',
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: 'red',
+              secondary: 'white',
+            },
+          },
+        }}
+      />
+
       <RouterProvider router={router} />
     </>
   )
