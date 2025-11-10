@@ -7,6 +7,8 @@ import { formatDate } from "../../../utils/formatDate";
 import HtmlParser from "../../shared/HtmlParser";
 import BlogShare from "../BlogShare";
 import { useTranslation } from "react-i18next";
+import SearchIcon from "../../../assets/images/search.svg";
+
 const BlogSingleContentWrapper = ({ data }: { data: BlogProps }) => {
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
@@ -52,7 +54,7 @@ const BlogSingleContentWrapper = ({ data }: { data: BlogProps }) => {
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
               />
-              <i>⭕</i>
+              <img src={SearchIcon} alt="search icon" style={{ width: "24px", height: "24px" }} />
             </div>
           </div>
 

@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import LeftArrow from "../../../assets/images/Gallery/leftArrow.png";
 import RightArrow from "../../../assets/images/Gallery/rightArrow.png";
 import MainIconRight from "../../../assets/images/Gallery/mainIconRight.png";
+import SearchIcon from "../../../assets/images/search.svg";
 
 const BlogsWrapper = () => {
     const [searchValue, setSearchValue] = useState("");
@@ -99,7 +100,7 @@ const BlogsWrapper = () => {
                         value={searchValue}
                         onChange={handleChange}
                     />
-                    <i>⭕</i>
+                    <img src={SearchIcon} alt="search icon" style={{ width: "24px", height:"24px" }} />
                 </div>
             </div>
 
