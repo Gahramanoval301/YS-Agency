@@ -111,7 +111,7 @@ export async function getSmallProjects(
   const response = await fetch(
     `${
       import.meta.env.VITE_BACKEND_URL
-    }/api/project//small-data?page=${page}&limit=${limit}`
+    }/api/project/small-data?page=${page}&limit=${limit}`
   );
 
   const data = await response.json();
