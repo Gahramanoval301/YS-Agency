@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 type Language = 'en' | 'az' | 'ru';
 
 const Header = () => {
-    const { t, i18n } = useTranslation();
+    const { i18n } = useTranslation();
     const storedLang = (localStorage.getItem('lang') || 'en') as Language;
     const [currentLang, setCurrentLang] = useState<Language>(storedLang);
     const MENU_ITEMS = useMenuItems();
