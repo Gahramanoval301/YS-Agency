@@ -14,7 +14,7 @@ const Header = ({ setIsOpen }: { setIsOpen: React.Dispatch<React.SetStateAction<
           </div>
 
           <div className=''>
-            <h5 className='text-[#FFFFFF66]'>Namiq Rzayev</h5>
+            <h5 className='text-[#FFFFFF66]'>Laman Gahramanova</h5>
             <p className='text-[#FF3EFC] text-[13px]'>Super Admin</p>
           </div>
         </div>
