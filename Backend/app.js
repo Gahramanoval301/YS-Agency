@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 4000;
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:5174", "https://ys-agency-public-website-snowy.vercel.app"],
+    origin: ["https://ys-agency-public-website-snowy.vercel.app", "https://ys-agency-admin-panel.vercel.app/", "http://localhost:5173", "http://localhost:5174"],
     credentials: true,
   })
 );
